@@ -4,19 +4,20 @@ Resources for the Gridlock Network; whitepapers, branding, fonts, logos, documen
 ## Branding
 
 
-Refer to the [Gridlock Style Guide](https://github.com/thorchain/Branding/blob/master/GridlockBranding.pdf)
+Refer to the [Gridlock Style Guide](https://github.com/thorchain/Resources/blob/master/GridlockBranding.pdf)
 
 ### [Fonts](https://github.com/gridlocknetwork/Resources/tree/master/fonts)
 Primary: [Mont](/fonts/mont)
 
 Secondary: [Montserrat](/fonts/montserrat)
 
+blob/master/logos/png/gridlock_main_logo.png
 
 ### [Logos](https://github.com/thorchain/Resources/tree/master/logos)
 |Logo|Light|Dark|
 |---|---|---|
-Long | <img src="https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_main_logo.png" width="196" height="50" /> | <img src="https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_logo_knockout.png" width="196" height="50" />
-Icon | <img src="https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_icon.png" width="50" height="50" />| <img src="https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_icon_knockout.png" width="50" height="50" />
+Long | <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_main_logo.png" width="196" height="50" /> | <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_knockout_logo_black.png" width="196" height="50" />
+Icon | <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_icon.png" width="50" height="50" />| <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_knockout_icon_black.png" width="50" height="50" />
 
 
 ### Colours
