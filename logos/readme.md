@@ -6,9 +6,8 @@
 
 [gridlock_main_logo.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_main_logo.png)
 
-[gridlock_logo_white_text.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_logo_white_text.png)
+[gridlock_knockout_logo.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_knockout_logo.png)
 
-[gridlock_logo_white.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_logo_white.png)
 
 
 ### Icon
