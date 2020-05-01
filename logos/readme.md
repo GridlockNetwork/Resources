@@ -11,15 +11,11 @@
 
 
 ### Icon
-[gridlock_icon_square.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_icon_square.png)
-
-[gridlock_icon_rounded.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_icon_rounded.png)
-
-[gridlock_icon_circle.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_icon_circle.png)
-
 [gridlock_icon.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_icon.png)
 
+[gridlock_knockout_icon.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_knockout_icon.png)
 
+[gridlock_icon_square.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_icon_square.png)
 
-[Gridlock_favicon.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_favicon.png)
+[gridlock_knockout_icon_square.png](https://github.com/gridlock/Branding/blob/master/logos/png/gridlock_knockout_icon_square.png)
 
