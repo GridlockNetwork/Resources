@@ -11,13 +11,11 @@ Primary: [Mont](/fonts/mont)
 
 Secondary: [Montserrat](/fonts/montserrat)
 
-blob/master/logos/png/gridlock_main_logo.png
-
 ### [Logos](https://github.com/thorchain/Resources/tree/master/logos)
 |Logo|Light|Dark|
 |---|---|---|
-Long | <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_main_logo.png" width="196" height="50" /> | <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_knockout_logo_black.png" width="196" height="50" />
-Icon | <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_icon.png" width="50" height="50" />| <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_knockout_icon_black.png" width="50" height="50" />
+Long | <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_main_logo.png" width="196" height="50" /> | <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_knockout_logo_background.png" width="196" height="50" />
+Icon | <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_icon.png" width="50" height="50" />| <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_knockout_icon_background.png" width="50" height="50" />
 
 
 ### Colours
