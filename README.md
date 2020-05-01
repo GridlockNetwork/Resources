@@ -7,7 +7,7 @@ Resources for the Gridlock Network; whitepapers, branding, fonts, logos, documen
 Refer to the [Gridlock Style Guide](https://github.com/thorchain/Branding/blob/master/GridlockBranding.pdf)
 
 ### [Fonts](https://github.com/gridlocknetwork/Resources/tree/master/fonts)
-Primary: [MONT](/fonts/mont)
+Primary: [Mont](/fonts/mont)
 
 Secondary: [Montserrat](/fonts/montserrat)
 
