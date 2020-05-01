@@ -4,14 +4,14 @@ Resources for the Gridlock Network; whitepapers, branding, fonts, logos, documen
 ## Branding
 
 
-Refer to the [Gridlock Style Guide](https://github.com/thorchain/Resources/blob/master/GridlockBranding.pdf)
+Refer to the [Gridlock Style Guide](https://github.com/GridlockNetwork/Resources/blob/master/GridlockBranding.pdf)
 
 ### [Fonts](https://github.com/gridlocknetwork/Resources/tree/master/fonts)
 Primary: [Mont](/fonts/mont)
 
 Secondary: [Montserrat](/fonts/montserrat)
 
-### [Logos](https://github.com/thorchain/Resources/tree/master/logos)
+### [Logos](https://github.com/GridlockNetwork/Resources/tree/master/logos)
 |Logo|Light|Dark|
 |---|---|---|
 Long | <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_main_logo.png" width="196" height="50" /> | <img src="https://github.com/GridlockNetwork/Resources/blob/master/logos/png/gridlock_knockout_logo_background.png" width="196" height="50" />
