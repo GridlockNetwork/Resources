@@ -4,7 +4,7 @@
 
 devs@gridlock.network
 
-V0.1 April 2020
+V0.5 May 2020
 
 ### Abstract 
 
