@@ -8,11 +8,11 @@ V0.1 April 2020
 
 ### Abstract 
 
->Gridlock Network is a distributed keystore using a variety of network actors for increased security. Private keys are split into shares using the Threshold Signature Scheme (TSS), an m of n signature scheme, with a minimum recommendation of 3 of 5 shares for a rebuild threshold. Key shares are distributed to network actors for storage and transaction signing. The primary actor in the Gridlock Network is Enigma's Secret Network, which makes Gridlock a network of networks. Nodes on Enigma's network use Intel's trusted execution environments, called enclaves, to ensure secrecy of stored information. This insurance protects against collusion of participating nodes and increases availability due to share distribution across the entire Secret Network. Gridlock enhances this security and protects against side-channel attacks by distributing shares to non-Enigma actors to protect against the risk of broken enclaves. Additional actors include personal devices, trusted acquaintance devices, personal cloud devices and trusted key store services like Gridlock Keystore.
+>Gridlock Network is a distributed keystore using a variety of network actors for increased security. Private keys are split into shares using the Threshold Signature Scheme (TSS), an m of n signature scheme, with a minimum recommendation of 3 of 5 shares for a rebuild threshold. Key shares are distributed to network actors for storage and transaction signing. The primary actor in the Gridlock Network is Enigma's Secret Network, which makes Gridlock a network of networks. Nodes on Enigma's network use Intel's trusted execution environments, called enclaves, to ensure secrecy of stored information. This insurance protects against collusion of participating nodes and increases availability due to share distribution across the entire Secret Network. Gridlock enhances this security and protects against side-channel attacks by distributing shares to non-Enigma actors to protect against the risk of broken enclaves. Additional actors include personal devices, trusted acquaintance devices, personal cloud devices and trusted key store services like Gridlock Watchlight.
 
 ## Overview
 
-[Problem/Solution](#problem-/-solution)	
+[Problem/Solution](#problem--solution)	
 
 - Problem
 - Solution
@@ -22,44 +22,21 @@ V0.1 April 2020
 - Overview	
 - Additional Actors
 - Key Generation
-- Wallet Generation
-- Signing
 
 [User Experience](#user-experience)	
 
-- Wallets	
+- Wallet Generation
+- Signing
 - Account Recovery
-- Validator Staking	
 
 [Advanced Features](#advanced-features)
 
 - Multi-sig Accounts	
 - One-way Asset Flow
 - Asset Management
-- Recurring Transactions
-
-[Other Features](#other-features)
-
-- 
+- Watchlight Service
 
 [Conclusion](#conclusion)	
-
-[References](#reference)	
-
-
-## Definitions
-
-| Item  | Definition    |
-| ----- | ------------- |
-|       |               |
-| :---: | :------------ |
-| ----- | ------------- |
-|       |               |
-
-|ECDSA|Elliptical Curve Digital Signature Algorithm
-|SCRT | Enigma's Secret Network Token
-
-|TSS | Threshold Signature Scheme
 
 ## Problem / Solution
 
@@ -85,7 +62,7 @@ The primary actor is Enigma's Secret Network, making Gridlock a network of netwo
 
 Enigma enclaves are potentially susceptible to side-channel attacks which can allow hackers or node operators to break the security of an enclave. The viability of these attacks is questionable outside an academic setting given a correctly hardened protocol. Still, the potential of loss is too great to rely solely on an enclave to ensure the security of a private key. For additional security, secondary non-Enigma actors are necessary. 
 
-Secondary network actors provide insurance against the possibility of cracked enclaves in Enigma's network. Additional actors include personal devices, trusted acquaintance devices, personal cloud devices and trusted key store services like Gridlock Keystore. The variety of each actor increases network security by varying the attack surface, so a flaw in any area of the network does not cause a loss of assets. 
+Secondary network actors provide insurance against the possibility of cracked enclaves in Enigma's network. Additional actors include personal devices, trusted acquaintance devices, personal cloud devices and trusted key store services like Gridlock Watchlight. The variety of each actor increases network security by varying the attack surface, so a flaw in any area of the network does not cause a loss of assets. 
 
 Gridlock wallets are highly usable since users are not required to manage their private keys. Instead, keys are distributed throughout the network, controlled by the user alone. To  access a wallet, owners provide a hashed identity and credentials. User identities are hashed and encrypted before storage which means no network actor knows the identity of the wallet owner. 
 
@@ -103,8 +80,6 @@ Enigma privacy-preserving network is used to store one or more key shares as lon
 
 Gridlock utilizes a client-side application for wallet generation and usage. The application can encrypt and store one key share on the device. Users can add more actors of the same type with additional personal devices or hardware-based key storage devices. 
 
-
-
 ##### Personal Cloud Device
 
 Microservers and microservices allow users to store personal data on a cloud server. These servers are affordable, always online, and always in the owner's control. Gridlock aims to work with cloud providers to make the creation of these devices as easy as a click of a button. 
@@ -115,7 +90,7 @@ One or more trusted acquaintances can store a key share using the client-side ap
 
 ##### Trusted service
 
-A trusted key store service, like Gridlock Keystore, can store a key share and provide additional protection not available in other "passive" storage options. This option adds benefits of modern FinTech security practices, like suspicious transactions, without the ultimate control of a full key store service. 
+A trusted key store service, like Gridlock Watchlight, can store a key share and provide additional protection not available in other "passive" storage options. This option adds benefits of modern FinTech security practices, like suspicious transactions, without the ultimate control of a full key store service. 
 
 
 
@@ -123,7 +98,11 @@ A trusted key store service, like Gridlock Keystore, can store a key share and p
 
 Distributed key generation ensures that the private keys are never fully available which eliminates problems with potentially compromised nodes. TSS requires multiple rounds of communication between participating actors to generate a private key, the amount of communication required depends on the number of participants. 
 
-Prior to user interaction, private-public keypairs are generated for all supported coins, reducing the wallet generation time for new users. Keys are stored into the system and 
+Prior to user interaction, private-public keypairs are generated for all supported coins, reducing the wallet generation time for new users. Keys are stored in the system and available for user association once a user account is created. 
+
+
+
+## User Experience
 
 
 
@@ -136,20 +115,6 @@ New users generate wallets for asset storage by associating their access informa
 ### Signing
 
 To transfer funds our of the network or sign transactions, users must authenticate with each network actor and request the actor's portion of the signature. The user starts by sending a packet of information containing their hashed identity and hashed credentials to a network participant. They also include the same information encrypted with public keys of other participants. This first node contacted becomes the 'primary actor' and is responsible for communication between other participants to generate a fully signed transaction. They are also responsible for communicating the signed transaction to the associated blockchain. 
-
-## User Experience
-
-### Wallets
-
-The following is the user experience of interacting with Gridlock-based wallets and interfaces.
-
-**Instantiating Wallet**
-
-<todo>
-
-**Using Wallet**
-
-<todo>
 
 ### Account Recovery
 
@@ -175,15 +140,18 @@ A public key is necessary when receive
 
 Periodic rotating of private keys is important to increase system security. This reduces the time-window in which an attacker can obtain a private key. The attacker has to compromise each share holder before the private key is changed. TSS-based wallets have the ability to rotate key shares such that a new private key is created but the public-key remains unchanged. This is useful when the public key is needed for long term use but typically the user is not concern with how keys are used.
 
-It is therefor possible to have a public key for receving funds only and a separate publick key for sending funds. Put another way, all funds entering the system do not necessarily need to stay associated with their initial public key. The funds can rotate through the network as long as the user is able to track and spend funds when desired. This has enormous privacy benefits as the system because a mixer by default. 
+It is therefor possible to have a public key for receiving funds only and a separate public key for sending funds. Put another way, all funds entering the system do not necessarily need to stay associated with their initial public key. The funds can rotate through the network as long as the user is able to track and spend funds when desired. This has enormous privacy benefits as the system because a mixer by default. 
 
 ### Asset Management
 
-Gridlock can provide additional services that can help users with asset management (investing, planning, balancing, etc. )
+Gridlock Network is effectively non-custodial since no entity has control of stored funds. The only person able to access and control funds is the owner. However, the system can include include a permission framework that allows for granular permissions. Asset owners can define which services have access to funds and for what reason. For example, the owner can determine which services have access for investment purposes. This allows for a marketplace of services that benefit the both the user and service provider. 
+
+### Watchlight Service
+
+Gridlock Watchlight is an additional service that can add oversight protection for wallet owners. The service does not have ultimate control of a user's funds, but rather it is closely connected to the wallet and can monitor activity. This adds the benefit of professional monitoring which can suspicious transactions or coordinated attacks which are not normally identifiable in a randomly distributed system. If suspicious activity is identified, that service can proactively notify the owner. The service can tread the line between privacy and proactive monitoring. 
 
 
 
 ## Conclusion
 
 Gridlock Network is the first truly secure and private cryptocurrency storage solution. Threshold Signatures combined with Trusted Execution Environments provide unparalleled security and availability, beyond any other solution available today. The offloading of complex key management eliminates one of the biggest barriers to mainstream crypto adoption. The elimination of a central authority vastly increases security and maintains a user's privacy. 
-
