@@ -17,7 +17,7 @@ V0.5 May 2020
 - Problem
 - Solution
 
-[Gridlock Architecture](#Gridlock Architecture)
+[Gridlock Architecture](#gridlock-architecture)
 
 - Overview	
 - Additional Actors
