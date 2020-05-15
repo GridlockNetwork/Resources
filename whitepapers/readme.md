@@ -66,7 +66,7 @@ Gridlock wallets are highly usable since users are not required to manage their 
 
 ## Network Architecture
 
-Key shares are distributed across multiple devices to gain the security benefits of each. The [key share topology document ](https://github.com/GridlockNetwork/Resources/blob/master/documentation/Gridlock - Key Distribution Topology.pdf)shows a default 3-of-5 key share distribution. 
+Key shares are distributed across multiple devices to gain the security benefits of each. The [key share topology document ](https://github.com/GridlockNetwork/Resources/blob/master/documentation/Gridlock%20-%20Key%20Distribution%20Topology.pdf)shows a default 3-of-5 key share distribution. 
 
 ### Primary device(s)
 
@@ -157,8 +157,6 @@ With this architecture, funds transfer and transaction signing occur as follows:
 2) Each storage device validates the user's credentials. If accepted, it returns their portion of the signed transaction back to the primary device. 
 
 3) The primary device combines all signature pieces and transmits the complete signed transaction to the correct blockchain network. 
-
-### Fading Security
 
 ### Fading Security
 
