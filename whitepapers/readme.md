@@ -206,7 +206,13 @@ Gridlock Network is effectively non-custodial since no entity has control of sto
 
 Gridlock Watchlight is an additional service that can add oversight protection for wallet owners. The service does not have the ultimate control of a user’s funds. Instead, it can closely monitor connected wallets and can monitor activity. This key share storage service adds the benefit of professional monitoring which watch for suspicious transactions or coordinated attacks. This type of oversight is difficult with the standard distributed devices.  If Watchlight identifies any suspicious activity, we can proactively notify the owner. This service bridges the gap between privacy and proactive monitoring. 
 
+## Attack Vectors
 
+Although we’ve gone to great lengths to ensure architectural security, a system is only as safe as its known attack vectors. 
+
+1. Communication Hub Takeover - As a centralized system, the communicatio hub is vulnerable to take over in a traditional sense. This risk is mitigated by ensuring the router has minimal view into the encrypted packets its routing.
+2. Threshold Signature Attacks - are there any known TSS attacks? need to research.
+3. Stealing a users credentials - secured by 2FA along with signature request processs from nodes.
 
 ## Conclusion
 
