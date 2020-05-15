@@ -4,7 +4,7 @@ Resources for the Gridlock Network; whitepapers, branding, fonts, logos, documen
 ## Branding
 
 
-Refer to the [Gridlock Style Guide](https://github.com/GridlockNetwork/Resources/blob/master/GridlockBranding.pdf)
+Refer to the [Gridlock Style Guide](https://github.com/GridlockNetwork/Resources/blob/master/documentation/GridlockBranding.pdf)
 
 ### [Fonts](https://github.com/gridlocknetwork/Resources/tree/master/fonts)
 Primary: [Mont](/fonts/mont)
