@@ -1,4 +1,4 @@
-# Gridlock Network
+﻿# Gridlock Network
 
 ## A secure and private cryptocurrency storage service
 
@@ -8,7 +8,7 @@ V0.5 May 2020
 
 ### Abstract 
 
-Gridlock Network is a distributed keystore using a variety of network devices for increased security. Private keys are split into shares using the Threshold Signature Scheme (TSS), an m of n signature scheme, with a minimum recommendation of 3 of 5 shares for a rebuild threshold. Key shares are distributed to network devices for storage and transaction signing. The primary device in the Gridlock Network is Enigma's Secret Network, which makes Gridlock a network of networks. Nodes on Enigma's network use Intel's trusted execution environments, called enclaves, to ensure secrecy of stored information. This insurance protects against collusion of participating nodes and increases availability due to share distribution across the entire Secret Network. Gridlock enhances this security and protects against side-channel attacks by distributing shares to non-Enigma devices to protect against the risk of broken enclaves. Additional devices include personal devices, trusted acquaintance devices, personal cloud devices and trusted key store services like Gridlock Watchlight.
+Gridlock Network is a distributed keystore using a variety of network devices for increased security. Private keys are split into shares using the Threshold Signature Scheme (TSS), an m of n signature scheme, with a minimum recommendation of 3 of 5 shares for a rebuild threshold. Key shares are distributed to network devices for storage and transaction signing. The primary device in the Gridlock Network is Enigma's Secret Network, which makes Gridlock a network of networks. Nodes on the Secret network use Intel's trusted execution environments, called enclaves, to ensure secrecy of stored information. This insurance protects against collusion of participating nodes and increases availability due to share distribution across the entire Secret Network. Gridlock enhances this security and protects against side-channel attacks by distributing shares to non-Enigma devices to protect against the risk of broken enclaves. Additional devices include personal devices, trusted acquaintance devices, personal cloud devices and trusted key store services like Gridlock Watchlight.
 
 ## Overview
 
@@ -42,11 +42,11 @@ Gridlock Network is a distributed keystore using a variety of network devices fo
 
 ### Problem
 
-Cryptocurrency users have only two options when storing assets, either with a third-party cryptocurrency exchange or a personal cryptocurrency wallet. Both options have drawbacks, in privacy, usability, and security, some of which can ultimately lead to a loss of all assets.
+Cryptocurrency users have only two options when storing assets, either with a third-party cryptocurrency exchange or a personal cryptocurrency wallet. Both options have drawbacks in privacy, usability, and security, some of which can ultimately lead to a loss of all assets.
 
-Exchanges are centralized entities with complete control over a user's funds and knowledge of user's identities. Users are subject to arbitrary transaction delays and withheld assets based on the whim of the exchange. Furthermore, all assets are lost if an exchange is hacked, goes out of business, exit scams or is otherwise shut down. Many exchanges have shut down in one of these ways, which has led to the saying "Not your keys, not your coins". The saying promotes storing of assets in personal wallets outside the oversight of exchanges.
+Exchanges are centralized entities with complete control over a user's funds and knowledge of the user's identities. Users are subject to arbitrary transaction delays and withheld assets based on the whim of the exchange. Furthermore, all assets are lost if an exchange is hacked, goes out of business, exit scams or is otherwise shut down. Many exchanges have shut down in one of these ways, which has led to the saying "Not your keys, not your coins". The saying promotes storing of assets in personal wallets outside the oversight of exchanges.
 
-However, while crypto wallets give control back to the user, that control is a double-edged sword. Full control means a user is responsible for the management and security of their private keys. All assets vanish if a private key is lost or stolen. Most wallets do have backup mechanisms- namely mnemonic phrases - which allow users to recover lost keys. The problem here is that the backup itself is still a single point of failure. If a user's mnemonic phrase is stolen, all assets are lost. 
+While crypto wallets give control back to the user, that control is a double-edged sword. Full control means a user is solely responsible for the management and security of their private keys. All assets vanish if a private key is lost or stolen. Most wallets do have backup mechanisms, namely mnemonic phrases, which allow users to recover lost keys. The problem here is the backup itself is still a single point of failure. If a user's mnemonic phrase is lost or stolen, all assets are unrecoverable. 
 
 Other solutions like hardware wallets, smart contract wallets, or multi-sig wallets add value in one way or another, but all still have problems with security and usability. The community needs a solution that doesn't sacrifice privacy in the name of usability or usability in the name of security. 
 
@@ -56,7 +56,7 @@ Gridlock overcomes problems with security, usability, and privacy by distributin
 
 Keys are split into key shares using a Threshold Signature Scheme, which requires a designated threshold of shares before the key is used. The initially recommended threshold is 3 of 5, meaning that five key shares are distributed, and three must come together to rebuild the key. Shares are distributed among participating network devices for storage. 
 
-The primary tool for key storage is Enigma's Secret Network, making Gridlock a network of networks. Enigma's network ensures the secrecy of shares by mandating that nodes running the network use Intel trusted execution environments (TEE), enclaves, for all computations and data storage. This feature encrypts all sensitive data, so it is hidden from everyone, including the node operator. This restriction allows for the availability benefits of multiple storage nodes and protects against the possibility of malicious node operators.
+The primary tool for key storage is Enigma's Secret Network, making Gridlock a network of networks. Enigma's network ensures the secrecy of shares by mandating that nodes running the network use Intel’s trusted execution environments (TEE), also known as enclaves, for all computations and data storage. This feature encrypts all sensitive data, hiding it from everyone, including the node operator. This restriction allows for the availability benefits of multiple storage nodes and protects against the possibility of malicious node operators.
 
 Enigma enclaves are potentially susceptible to side-channel attacks which can allow hackers or node operators to break the security of an enclave. The viability of these attacks is questionable outside an academic setting given a correctly hardened protocol. Still, the potential of loss is too great to rely solely on an enclave to ensure the security of a private key. For additional security, secondary non-Enigma devices are necessary. 
 
