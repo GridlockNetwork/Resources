@@ -55,7 +55,7 @@ Other solutions like hardware wallets, smart contract wallets, or multi-sig wall
 
 Gridlock overcomes problems with security, usability, and privacy by distributing a user's private keys across multiple devices. 
 
-Keys are split into key shares using a Threshold Signature Scheme, which requires a designated threshold of shares before the key is used. The initially recommended threshold is 3 of 5, meaning that 5 key shares are distributed, and 3 must come together to rebuild the key. Shares are distributed among participating network devices for storage. 
+Keys are split into key shares using the multi-party ECDSA Threshold Signature Scheme(TSS), which requires a designated threshold of shares before the key is used. The initially recommended threshold is 3 of 5, meaning that 5 key shares are distributed, and 3 must come together to rebuild the key. Shares are distributed among participating network devices for storage. 
 
 The primary tool for key storage is Enigma's Secret Network, making Gridlock a network of networks. Enigma's network ensures the secrecy of shares by mandating that nodes running the network use Intel’s trusted execution environments (TEE), also known as enclaves, for all computations and data storage. This feature encrypts all sensitive data, hiding it from everyone, including the node operator. This restriction allows for the availability benefits of multiple storage nodes and protects against the possibility of malicious node operators.
 
@@ -189,6 +189,10 @@ Although we’ve gone to great lengths to ensure architectural security, a syste
 1. Communication Hub Takeover - As a centralized system, the communicatio hub is vulnerable to take over in a traditional sense. This risk is mitigated by ensuring the router has minimal view into the encrypted packets its routing.
 2. Threshold Signature Attacks - are there any known TSS attacks? need to research.
 3. Stealing a users credentials - secured by 2FA along with signature request processs from nodes.
+
+### Multiparty ECDSA TSS
+
+ECDSA is a standardized signing algorithm that is widely used in TLS, code signing and cryptocurrency, it is used to sign transactions of bitcoins. It is based on  Elliptic-curve cryptography. Securely computing ECDSA in a distributed manner, also known as Threshold signing, is needed for protection of the signing key by sharing the key with multiple parties and thus preventing one party from accessing it.
 
 ## Advanced Features
 
