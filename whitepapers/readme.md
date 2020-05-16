@@ -191,6 +191,7 @@ Although we’ve gone to great lengths to ensure architectural security, a syste
 1. Communication Hub Takeover - As a centralized system, the communicatio hub is vulnerable to take over in a traditional sense. This risk is mitigated by ensuring the router has minimal view into the encrypted packets its routing.
 2. Threshold Signature Attacks - are there any known TSS attacks? need to research.
 3. Stealing a users credentials - secured by 2FA along with signature request processs from nodes.
+4. Side-channel attacks on SGX[2].
 
 ### Full-threshold ECDSA
 
@@ -227,3 +228,4 @@ Gridlock Network is the first truly secure and private cryptocurrency storage so
 ## References 
 
 [1] [Fast Secure Multiparty ECDSA with Practical Distributed KeyGeneration and Applications to Cryptocurrency Custody](https://dl.acm.org/doi/pdf/10.1145/3243734.3243788)
+[2] [The Security of Intel SGX for Key Protection andData Privacy Applications](https://cdn2.hubspot.net/hubfs/1761386/Unbound_Docs_/security-of-intelsgx-key-protection-data-privacy-apps.pdf)
