@@ -8,7 +8,7 @@ V0.6 May 2020
 
 ### Abstract 
 
-Gridlock Network is a distributed keystore using a variety of network devices for increased security. Private keys are split into shares using the Threshold Signature Scheme, an m of n signature scheme, with a minimum recommendation of 3 of 5 shares for a rebuild threshold. Key shares are distributed to network devices for storage and transaction signing. The primary device in the Gridlock Network is Enigma's Secret Network, which makes Gridlock a network of networks. Nodes on the Secret Network use Intel's trusted execution environments, called enclaves, to ensure secrecy of stored information. This insurance protects against collusion of participating nodes and increases availability due to share distribution across the entire Secret Network. Gridlock enhances this security and protects against side-channel attacks by distributing shares to non-Enigma devices to protect against the risk of broken enclaves. Additional devices include personal devices, trusted acquaintance devices, personal cloud devices,
+Gridlock Network is a distributed keystore using a variety of network devices for increased security. Private keys are split into shares using the full-threshold EDCSA signature scheme, an m of n signature scheme, with a minimum recommendation of 3 of 5 shares for a rebuild threshold. Key shares are distributed to network devices for storage and transaction signing. The primary device in the Gridlock Network is Enigma's Secret Network, which makes Gridlock a network of networks. Nodes on the Secret Network use Intel's trusted execution environments, called enclaves, to ensure secrecy of stored information. This insurance protects against collusion of participating nodes and increases availability due to share distribution across the entire Secret Network. Gridlock enhances this security and protects against side-channel attacks by distributing shares to non-Enigma devices to protect against the risk of broken enclaves. Additional devices include personal devices, trusted acquaintance devices, personal cloud devices,
 and trusted key store services like Gridlock Watchlight.
 
 ## Overview
@@ -55,7 +55,7 @@ Other solutions like hardware wallets, smart contract wallets, or multi-sig wall
 
 Gridlock overcomes problems with security, usability, and privacy by distributing a user's private keys across multiple devices. 
 
-Keys are split into key shares using the multi-party ECDSA Threshold Signature Scheme(TSS), which requires a designated threshold of shares before the key is used. The initially recommended threshold is 3 of 5, meaning that 5 key shares are distributed, and 3 must come together to rebuild the key. Shares are distributed among participating network devices for storage. 
+Keys are split into key shares using the full-threshold ECDSA signature scheme, which requires a designated threshold of shares before the key is used. The initially recommended threshold is 3 of 5, meaning that 5 key shares are distributed, and 3 must come together to rebuild the key. Shares are distributed among participating network devices for storage. 
 
 The primary tool for key storage is Enigma's Secret Network, making Gridlock a network of networks. Enigma's network ensures the secrecy of shares by mandating that nodes running the network use Intel’s trusted execution environments (TEE), also known as enclaves, for all computations and data storage. This feature encrypts all sensitive data, hiding it from everyone, including the node operator. This restriction allows for the availability benefits of multiple storage nodes and protects against the possibility of malicious node operators.
 
@@ -68,8 +68,6 @@ Gridlock wallets are highly usable since users are not required to manage their 
 ## Network Architecture
 
 Key shares are distributed across multiple devices to gain the security benefits of each. The [key share topology document ](https://github.com/GridlockNetwork/Resources/blob/master/documentation/Gridlock%20-%20Key%20Distribution%20Topology.pdf)shows a default 3-of-5 key share distribution. 
-
-![](key-distribution-topology.png)
 
 ### Primary device(s)
 
@@ -194,11 +192,9 @@ Although we’ve gone to great lengths to ensure architectural security, a syste
 
 ### Full-threshold ECDSA
 
-The Gridlock Vault will utilize a full-threshold ECDSA. Elliptic Curve Digital Signature Algorithm(ECDSA) is a standardized signing algorithm that is used in Transport Layer Securty(TLS), code signing, cryptocurrency and more.  Full-threshold means that any t-out-of-n parties can sign a message thus this protocol would allow distributed signing and key-generation with any t <= n. 
+The Gridlock Vault will utilize a full-threshold ECDSA. Elliptic Curve Digital Signature Algorithm(ECDSA) is a standardized signing algorithm that is used in Transport Layer Securty(TLS), code signing, cryptocurrency and more.  Full-threshold means that any t-out-of-n parties can sign a message thus this protocol would allow distributed signing and key-generation with any t <= n. Securely computing ECDSA in a distributed manner, t-out-of-n threshold signing, is needed for protecting of the private key. By splitting the secret key between multiple devices it avoids that the storage of the secret key becomes the single point of failure because no single device or party has access to the full private key. T-out-of-n Threshold Signatures ensures that any t+1 of the devices that store a share of the private key can jointly sign any given message but no t colluding parties can forge a signature at all. 
 
-Securely computing ECDSA in a distributed manner, t-out-of-n threshold signing, is needed for protecting of the private key. By splitting the secret key between multiple devices it avoids that the storage of the secret key becomes the single point of failure because no single device or party has access to the full private key. T-out-of-n Threshold Signatures ensures that any t+1 of the devices that store a share of the private key can jointly sign any given message but no t colluding parties can forge a signature at all. 
-
-
+For more details on full-threshold ECDSA for distributed key generation and signing the reader is refered to the paper by Lindell et al[1].
 
 ## Advanced Features
 
@@ -225,3 +221,7 @@ Gridlock Watchlight is an optional add-on service that provides oversight protec
 ## Conclusion
 
 Gridlock Network is the first truly secure and private cryptocurrency storage solution. Threshold Signatures combined with Trusted Execution Environments provide unparalleled security and availability, beyond any other solution available today. The offloading of complex key management eliminates one of the biggest barriers to mainstream crypto adoption. The elimination of a central authority vastly increases security and maintains a user’s privacy. 
+
+## References 
+
+[1] [Fast Secure Multiparty ECDSA with Practical Distributed KeyGeneration and Applications to Cryptocurrency Custody](https://dl.acm.org/doi/pdf/10.1145/3243734.3243788)
