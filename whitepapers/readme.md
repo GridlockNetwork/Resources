@@ -192,7 +192,10 @@ Although we’ve gone to great lengths to ensure architectural security, a syste
 
 ### Multiparty ECDSA TSS
 
-ECDSA is a standardized signing algorithm that is widely used in TLS, code signing and cryptocurrency, it is used to sign transactions of bitcoins. It is based on  Elliptic-curve cryptography. Securely computing ECDSA in a distributed manner, also known as Threshold signing, is needed for protection of the signing key by sharing the key with multiple parties and thus preventing one party from accessing it.
+ECDSA is a standardized signing algorithm that is widely used in TLS, code signing and cryptocurrency, it is used to sign transactions of bitcoins. It is based on  Elliptic-curve cryptography. Securely computing ECDSA in a distributed manner, also known as Threshold signing, is needed for protection of the signing key by sharing the key with multiple parties and thus preventing one party from accessing it. 
+
+The Gridlock Vault will utilize a secure "full-threshold" protocol for multiparty ECDSA. Full-threshold means that any t-out-of-n parties can sign thus this protocol would enable distributed signing and key-generation for any number of parties that are involved. 
+
 
 ## Advanced Features
 
