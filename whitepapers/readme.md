@@ -182,6 +182,14 @@ The engine iterates through the defined logic whenever a user requests access. T
 
 **Tier 5:** Transfer funds to pre-defined Guardian
 
+### Attack Vectors
+
+Although we’ve gone to great lengths to ensure architectural security, a system is only as safe as its known attack vectors. 
+
+1. Communication Hub Takeover - As a centralized system, the communicatio hub is vulnerable to take over in a traditional sense. This risk is mitigated by ensuring the router has minimal view into the encrypted packets its routing.
+2. Threshold Signature Attacks - are there any known TSS attacks? need to research.
+3. Stealing a users credentials - secured by 2FA along with signature request processs from nodes.
+
 ## Advanced Features
 
 ### Multi-signature Accounts
