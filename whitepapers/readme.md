@@ -69,6 +69,8 @@ Gridlock wallets are highly usable since users are not required to manage their 
 
 Key shares are distributed across multiple devices to gain the security benefits of each. The [key share topology document ](https://github.com/GridlockNetwork/Resources/blob/master/documentation/Gridlock%20-%20Key%20Distribution%20Topology.pdf)shows a default 3-of-5 key share distribution. 
 
+![](key-distribution-topology.png)
+
 ### Primary device(s)
 
 Enigma's privacy-preserving network is the primary share store option in Gridlock's network due to its high availability and usage of secure SGX enclaves. We plan to use this network to store multiple key shares, as long as the network does not control a majority of shares. This strategy allows Gridlock to leverage the strength of a privacy-preserving network while removing the risks associated with compromised SGX enclaves.
