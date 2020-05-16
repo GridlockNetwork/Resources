@@ -8,7 +8,7 @@ V0.6 May 2020
 
 ### Abstract 
 
-Gridlock Network is a distributed keystore using a variety of network devices for increased security. Private keys are split into shares using the Threshold Signature Scheme (TSS), an m of n signature scheme, with a minimum recommendation of 3 of 5 shares for a rebuild threshold. Key shares are distributed to network devices for storage and transaction signing. The primary device in the Gridlock Network is Enigma's Secret Network, which makes Gridlock a network of networks. Nodes on the Secret Network use Intel's trusted execution environments, called enclaves, to ensure secrecy of stored information. This insurance protects against collusion of participating nodes and increases availability due to share distribution across the entire Secret Network. Gridlock enhances this security and protects against side-channel attacks by distributing shares to non-Enigma devices to protect against the risk of broken enclaves. Additional devices include personal devices, trusted acquaintance devices, personal cloud devices,
+Gridlock Network is a distributed keystore using a variety of network devices for increased security. Private keys are split into shares using the Threshold Signature Scheme, an m of n signature scheme, with a minimum recommendation of 3 of 5 shares for a rebuild threshold. Key shares are distributed to network devices for storage and transaction signing. The primary device in the Gridlock Network is Enigma's Secret Network, which makes Gridlock a network of networks. Nodes on the Secret Network use Intel's trusted execution environments, called enclaves, to ensure secrecy of stored information. This insurance protects against collusion of participating nodes and increases availability due to share distribution across the entire Secret Network. Gridlock enhances this security and protects against side-channel attacks by distributing shares to non-Enigma devices to protect against the risk of broken enclaves. Additional devices include personal devices, trusted acquaintance devices, personal cloud devices,
 and trusted key store services like Gridlock Watchlight.
 
 ## Overview
@@ -190,10 +190,12 @@ Although we’ve gone to great lengths to ensure architectural security, a syste
 2. Threshold Signature Attacks - are there any known TSS attacks? need to research.
 3. Stealing a users credentials - secured by 2FA along with signature request processs from nodes.
 
-### Multiparty Threshold ECDSA
+### Full-threshold ECDSA
 
-Elliptic Curve Digital Signature Algorithm(ECDSA) is a standardized signing algorithm that is widely used in Transport Layer Securty(TLS), code signing, cryptocurrency and more. Securely computing ECDSA in a distributed manner, also known as Threshold signing, is needed for protection of the private key. By splitting the secret key between multiple devices, t-out-of-n Threshold Signatures, it avoids that the storage of the secret key becomes the single point of failure because no single device or party has access to the full private key. T-out-of-n Threshold Signatures ensures that any t+1 of the devices that store a share of the private key can jointly sign any given message but no t colluding parties can forge a signature at all. 
-  The Gridlock Vault will utilize a full-threshold protocol for multiparty ECDSA. Full-threshold means that any t-out-of-n parties can sign a message thus this protocol would allow distributed signing and key-generation with more variability in the threshold t. 
+The Gridlock Vault will utilize a full-threshold ECDSA. Elliptic Curve Digital Signature Algorithm(ECDSA) is a standardized signing algorithm that is used in Transport Layer Securty(TLS), code signing, cryptocurrency and more.  Full-threshold means that any t-out-of-n parties can sign a message thus this protocol would allow distributed signing and key-generation with any t <= n. 
+
+Securely computing ECDSA in a distributed manner, t-out-of-n threshold signing, is needed for protecting of the private key. By splitting the secret key between multiple devices it avoids that the storage of the secret key becomes the single point of failure because no single device or party has access to the full private key. T-out-of-n Threshold Signatures ensures that any t+1 of the devices that store a share of the private key can jointly sign any given message but no t colluding parties can forge a signature at all. 
+
 
 
 ## Advanced Features
