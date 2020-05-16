@@ -69,7 +69,7 @@ Gridlock wallets are highly usable since users are not required to manage their 
 
 Key shares are distributed across multiple devices to gain the security benefits of each. The [key share topology document ](https://github.com/GridlockNetwork/Resources/blob/master/documentation/Gridlock%20-%20Key%20Distribution%20Topology.pdf)shows a default 3-of-5 key share distribution. 
 
-![](key-distribution-topology.png]
+![](key-distribution-topology.png)
 
 ### Primary device(s)
 
