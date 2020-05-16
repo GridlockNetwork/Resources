@@ -205,9 +205,9 @@ It is trivial to prove a systems security too far out in time since this is base
 
 ### Full-threshold ECDSA
 
-The Gridlock Vault will utilize a full-threshold ECDSA. Elliptic Curve Digital Signature Algorithm(ECDSA) is a standardized signing algorithm that is used in Transport Layer Securty(TLS), code signing, cryptocurrency and more.  Full-threshold means that any t-out-of-n parties can sign a message thus this protocol would allow distributed signing and key-generation with any t <= n. Securely computing ECDSA in a distributed manner, t-out-of-n threshold signing, is needed for protecting of the private key. By splitting the secret key between multiple devices it avoids that the storage of the secret key becomes the single point of failure because no single device or party has access to the full private key. T-out-of-n Threshold Signatures ensures that any t+1 of the devices that store a share of the private key can jointly sign any given message but no t colluding parties can forge a signature at all. 
+The Gridlock Vault will utilize a full-threshold ECDSA. Elliptic Curve Digital Signature Algorithm(ECDSA) is a standardized signing algorithm that is used in Transport Layer Security(TLS), code signing, cryptocurrency and more. Full-threshold means that any t-out-of-n parties can sign a message; thus, this protocol would allow distributed signing and key-generation with any <code>t <= n</code>. Securely computing ECDSA in a distributed manner, means that a <code>t-of-n</code> threshold is needed for the protection of the private key. Splitting the secret key between multiple devices avoids a single point of failure since no single device has access to the full private key. A <code>t-of-n</code> Threshold Signatures ensures that any <code>t+1</code> devices which store a piece of the private key can jointly sign a message, but no colluding parties can forge a signature.
 
-For more details on full-threshold ECDSA for distributed key generation and signing the reader is referred to the paper by Lindell et al[1].
+For more details on full-threshold ECDSA for distributed key generation and signing the reader is referred to the paper by Lindell et al. <sup>[1]</sup>.
 
 ## Advanced Features
 
