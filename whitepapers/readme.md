@@ -190,11 +190,10 @@ Although we’ve gone to great lengths to ensure architectural security, a syste
 2. Threshold Signature Attacks - are there any known TSS attacks? need to research.
 3. Stealing a users credentials - secured by 2FA along with signature request processs from nodes.
 
-### Multiparty ECDSA TSS
+### Multiparty Threshold ECDSA
 
-ECDSA is a standardized signing algorithm that is widely used in TLS, code signing and cryptocurrency, it is used to sign transactions of bitcoins. It is based on  Elliptic-curve cryptography. Securely computing ECDSA in a distributed manner, also known as Threshold signing, is needed for protection of the signing key by sharing the key with multiple parties and thus preventing one party from accessing it. 
-
-The Gridlock Vault will utilize a secure "full-threshold" protocol for multiparty ECDSA. Full-threshold means that any t-out-of-n parties can sign thus this protocol would enable distributed signing and key-generation for any number of parties that are involved. 
+Elliptic Curve Digital Signature Algorithm(ECDSA) is a standardized signing algorithm that is widely used in Transport Layer Securty(TLS), code signing, cryptocurrency and more. Securely computing ECDSA in a distributed manner, also known as Threshold signing, is needed for protection of the private key. By splitting the secret key between multiple devices, t-out-of-n Threshold Signatures, it avoids that the storage of the secret key becomes the single point of failure because no single device or party has access to the full private key. T-out-of-n Threshold Signatures ensures that any t+1 of the devices that store a share of the private key can jointly sign any given message but no t colluding parties can forge a signature at all. 
+  The Gridlock Vault will utilize a full-threshold protocol for multiparty ECDSA. Full-threshold means that any t-out-of-n parties can sign a message thus this protocol would allow distributed signing and key-generation with more variability in the threshold t. 
 
 
 ## Advanced Features
