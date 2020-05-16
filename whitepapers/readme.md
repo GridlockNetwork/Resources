@@ -2,7 +2,7 @@
 
 ## A secure and private cryptocurrency storage service
 
-[devs@gridlock.net](mailto:devs@gridlock.net)work
+[devs@gridlock.network](mailto:devs@gridlock.net)
 
 V0.6 May 2020
 
