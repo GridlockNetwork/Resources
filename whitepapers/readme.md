@@ -4,7 +4,7 @@
 
 [devs@gridlock.net](mailto:devs@gridlock.net)work
 
-V0.5 May 2020
+V0.6 May 2020
 
 ### Abstract 
 
@@ -184,25 +184,25 @@ The engine iterates through the defined logic whenever a user requests access. T
 
 ## Advanced Features
 
-### Multi-sig Accounts
+### Multi-signature Accounts
 
-Multi-signature accounts are as simple as supporting two or more identities with the same wallet. Once added, future transactions require a defined subset of identities before a transaction is signed. The default is `n of n` identities but can be changed if approved by all parties.   This option provides all the benefits of multi-sig authorizations without the weight of heavy multi-sig signatures on the blockchain. Since the approval logic is off-chain, the user can define granular logic beyond the standard yes-no logic in a multi-sig wallet. 
+Multi-signature accounts are as simple as supporting two or more identities with the same wallet. Once added, future transactions require a defined subset of identities before a transaction is signed. The default is `n of n` identities but can be changed if approved by all parties. This option provides all the benefits of multi-sign authorizations without the weight of heavy multi-sig signatures on the blockchain. Since the approval logic is off-chain, the user can define granular logic beyond the standard yes-no logic in a multi-sig wallet. 
 
 Wallets can also store metadata to document the identities that authorized each transaction. The information is stored within the wallet. This information allows users to keep an audit trail while maintaining on-chain privacy. 
 
 ### One-way asset flow
 
-Periodic rotating of private keys is important to increase system security. This rotation reduces the time-window in which an attacker can obtain a private key. An attacker must compromise each device, storing a key share before the private key is changed. TSS-based wallets can rotate key shares to generate a different set of key shares while retaining the original public key. This mechanism is useful when users want to retain the public key for long term use, but the typical user does not require this benefit.
+Periodic rotating of private keys is important to increase system security. This rotation reduces the time-window in which an attacker can obtain a private key. An attacker must compromise each device, storing a key share before the private key is changed. TSS-based wallets can rotate key shares to generate a different set of key shares while retaining the original public key. This mechanism is useful when users want to retain the public key for long-term use, but the typical user does not require this benefit.
 
-It is, therefore, possible to have a public key for receiving funds only and a separate public key for sending funds. Put another way, all funds entering the system are not restricted to the public key used to import funds. Gridlock can freely rotate funds throughout the network as long as the user can track and spend funds when desired. This rotation has enormous privacy benefits as the system becomes a mixer by default. 
+It is, therefore, possible to have a public key for receiving funds only and a separate public key for sending funds. Put another way, all funds entering the system are not restricted to the public key used to import funds. Gridlock can freely rotate funds throughout the network as long as the user can track and transfer funds when desired. This rotation has enormous privacy benefits as the system becomes a mixer by default. 
 
 ### Asset Management
 
-Gridlock Network is effectively non-custodial since no entity has control of stored funds. The only person able to access and control funds is the owner. However, the system can include a permission framework that allows for granular permissions. Asset owners can define which services have access to funds and for what reason. For example, the owner can determine which services have access for investment purposes. This granular level of control allows for a marketplace of services that benefit both the user and the service provider. The inclusion of explicit permissions helps assuage the fears of consumers when considering new services. 
+Gridlock Network is effectively non-custodial since no entity has control of stored funds. The only person able to access and control the funds is the owner. However, the system can include a permissions framework that allows for assignment of granular permissions to specified services. Asset owners can define which services have access to funds and for what reason. For example, the owner can determine which services have access for investment purposes. This granular level of control allows for a marketplace of services that benefit both the user and the service provider. The inclusion of explicit permissions helps assuage consumer fears when considering new services. 
 
 ### Watchlight Service
 
-Gridlock Watchlight is an additional service that can add oversight protection for wallet owners. The service does not have the ultimate control of a user’s funds. Instead, it can closely monitor connected wallets and can monitor activity. This key share storage service adds the benefit of professional monitoring which watch for suspicious transactions or coordinated attacks. This type of oversight is difficult with the standard distributed devices.  If Watchlight identifies any suspicious activity, we can proactively notify the owner. This service bridges the gap between privacy and proactive monitoring. 
+Gridlock Watchlight is an optional add-on service that provides oversight protection for wallet owners. The service does not have the ultimate control of a user’s funds. Instead, it can closely monitor connected wallets and activity. This key share storage service adds the benefit of professional monitoring, which watches for suspicious transactions or coordinated attacks. This type of oversight is difficult with the standard distributed devices. If Watchlight identifies any suspicious activity, we can proactively notify the owner. This service bridges the gap between privacy and proactive monitoring. 
 
 ## Conclusion
 
