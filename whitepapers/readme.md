@@ -45,21 +45,21 @@ and trusted key store services like Gridlock Watchlight.
 
 Cryptocurrency users have only two options when storing assets, either with a third-party cryptocurrency exchange or a personal cryptocurrency wallet. Both options have drawbacks in privacy, usability, and security, some of which can ultimately lead to a loss of all assets.
 
-Exchanges are centralized entities with complete control over a user's funds and knowledge of the user's identities. Users are subject to arbitrary transaction delays and withheld assets based on the whim of the exchange. Furthermore, all assets are lost if an exchange is hacked[1], goes out of business, exit scams, or is otherwise shut down[2]. Many exchanges have shut down in one of these ways, which has led to the saying "Not your keys, not your coins". The saying promotes storing of assets in personal wallets outside the oversight of exchanges.
+Exchanges are centralized entities with complete control over a user's funds and knowledge of the user's identities. Users are subject to arbitrary transaction delays and withheld assets based on the whim of the exchange. Furthermore, all assets are lost if an exchange is hacked, goes out of business, exit scams, or is otherwise shut down. Many exchanges have shut down in one of these ways, which has led to the saying "Not your keys, not your coins". The saying promotes storing of assets in personal wallets outside the oversight of exchanges.
 
-While crypto wallets give control back to the user, that control is a double-edged sword. Full control means a user is solely responsible for the management and security of their private keys. All assets vanish if a private key is lost or stolen. Most wallets do have backup mechanisms, namely mnemonic phrases, which allow users to recover lost keys. The problem here is the backup itself is still a single point of failure. If a user's mnemonic phrase is lost or stolen, all assets are unrecoverable. Crypto wallets are seriously lacking in usability.[3]
+While crypto wallets give control back to the user, that control is a double-edged sword. Full control means a user is solely responsible for the management and security of their private keys. All assets vanish if a private key is lost or stolen. Most wallets do have backup mechanisms, namely mnemonic phrases, which allow users to recover lost keys. The problem here is the backup itself is still a single point of failure. If a user's mnemonic phrase is lost or stolen, all assets are unrecoverable. 
 
-Other solutions like hardware wallets, smart contract wallets, or multi-sig wallets add value in one way or another, but all still have problems with security and usability.[4][5] The community needs a solution that doesn't sacrifice privacy in the name of usability or usability in the name of security. 
+Other solutions like hardware wallets, smart contract wallets, or multi-sig wallets add value in one way or another, but all still have problems with security and usability. The community needs a solution that doesn't sacrifice privacy in the name of usability or usability in the name of security. 
 
 ### Solution
 
 Gridlock overcomes problems with security, usability, and privacy by distributing a user's private keys across multiple devices. 
 
-Keys are split into key shares using the full-threshold ECDSA signature scheme[7], which requires a designated threshold of shares before the key is used. The initially recommended threshold is 3 of 5, meaning that 5 key shares are distributed, and 3 must come together to rebuild the key. Shares are distributed among participating network devices for storage. 
+Keys are split into key shares using the full-threshold ECDSA signature scheme, which requires a designated threshold of shares before the key is used. The initially recommended threshold is 3 of 5, meaning that 5 key shares are distributed, and 3 must come together to rebuild the key. Shares are distributed among participating network devices for storage. 
 
-The primary tool for key storage is Enigma's Secret Network[8], making Gridlock a network of networks. Enigma's network ensures the secrecy of shares by mandating that nodes running the network use Intel’s trusted execution environments (TEE), also known as enclaves, for all computations and data storage[9]. This feature encrypts all sensitive data, hiding it from everyone, including the node operator. This restriction allows for the availability benefits of multiple storage nodes and protects against the possibility of malicious node operators.
+The primary tool for key storage is Enigma's Secret Network, making Gridlock a network of networks. Enigma's network ensures the secrecy of shares by mandating that nodes running the network use Intel’s trusted execution environments (TEE), also known as enclaves, for all computations and data storage. This feature encrypts all sensitive data, hiding it from everyone, including the node operator. This restriction allows for the availability benefits of multiple storage nodes and protects against the possibility of malicious node operators.
 
-Enigma enclaves are potentially susceptible to side-channel attacks which can allow hackers or node operators to break the security of an enclave[10]. The viability of these attacks is questionable outside an academic setting, given an appropriately coded protocol. Still, the potential of loss is too great to rely solely on an enclave to ensure the security of a private key. For additional security, secondary non-Enigma devices are necessary. 
+Enigma enclaves are potentially susceptible to side-channel attacks which can allow hackers or node operators to break the security of an enclave. The viability of these attacks is questionable outside an academic setting, given an appropriately coded protocol. Still, the potential of loss is too great to rely solely on an enclave to ensure the security of a private key. For additional security, secondary non-Enigma devices are necessary. 
 
 Secondary network devices provide insurance against the possibility of cracked enclaves in Enigma's network. Additional devices include personal devices, trusted acquaintance devices, personal cloud devices, and trusted key store services like Gridlock Watchlight. The variety of each device increases network security by varying the attack surface, so a flaw in any area of the network does not cause a loss of assets. 
 
@@ -186,24 +186,28 @@ The engine iterates through the defined logic whenever a user requests access. T
 
 ### Attack Vectors
 
-Although we’ve gone to great lengths to ensure architectural security, a system is only as safe as its known attack vectors. 
+Although we’ve gone to great lengths to ensure architectural security, a system is only as safe as its known attack vectors. We identify 3 attack surfaces in the network.
 
-1. Communication Hub Takeover - As a centralized system, the communicatio hub is vulnerable to take over in a traditional sense. This risk is mitigated by ensuring the router has minimal view into the encrypted packets its routing.
-2. Threshold Signature Attacks - are there any known TSS attacks? need to research.
-3. Stealing a users credentials - secured by 2FA along with signature request processs from nodes.
-4. Side-channel attacks on SGX[3].
+1. Communication Hub Takeover - As a centralized system, the communicatio hub is vulnerable to take over in a traditional sense. Full control of the communication hub is deemed a low risk because in the case of a full takeover, the attacker would be able to glean minimal information from the routing requests. Compromising this piece would give the attacker the ability to decrypt where messages are being sent but would not be able to modify the transfered information. This type of attack will also become antiquated after Gridlock moves past it's proof-of-concept architecture, but remains the largest vulnerability until then.
+
+2. Coordinated Node Attacks - By virtue of it's architecture, Gridlock accounts are protected even if 2/5 of the nodes in a users vault are compromised. Thus, a minimum viable node attack would consist of taking over 2 enigma nodes + 1 additional node or 3 additional nodes (the case of 1 enigma node + 2 additional nodes being trivial). This attack is of course not speciffic to Gridlock architecture and is possible in any cryptocurrency wallet system, made easier by having a single keystore for users. Gridlock is already guranteed safer as it requires attackers to take over more than one system, but we address these concerns:
+    
+    2.1 Enigma Node Attack - Enigma nodes utilize Intel Software Guard Extensions, which enable
+the execution of security-critical application code away from untrusted system software. This technology provides numerous safety gurantees that are much better than a standard compute server but is not a perfectly secure system in its own right. In [2],  Lindell describes the extensive attack surface including page band cahce-based side channel . energy management , and speculative execution attacks. Each of these attacks requires "rare and specialized expertise" to mitigate and in fact are on the cutting edge and so that becomes the bar to hack a node in the engima network. "Due to the rich variety of effective attacks, the assumption should be that data privacy is not afforded via software run inside SGX." and is the exact reason why Gridlock uses enigma for 2 out of 5 nodes.
+    
+    2.2 Non Enigma Node Attack - While the requirements to undermine a node using hardware less secure than an enigma node are lower, this attack surface is heavily fragmented as in most cases, no 2 additional nodes will use the same compute architecture. This forces attackers to exploit more than one architecture, increasing its difficulty exponentially.
+
+The combination of 2.1 and 2.2 gives Gridlocks architecture better safety gurantees than that of the most secure wallet architectures known at this time. 
+
+3. Stealing a users credentials - The last large attack surface are on the user client side. Attacks here include impersonating users and cross-site request forgey attacks(xsrf attack). The former is mitigated using 2FA, which is an imperfect solution with known SIM-jacking techniques but easily blocked if any node in a users vault detects anomalyous activity from the user. The situation of a cross-site forgery attack can be mitigated using an anti xsrf token in the proof of concept architecture and is rendered a non-issue in the official architecture.
+
+It is trivial to prove a systems security too far out in time since this is based on known attack vectors. Gridlock's system is just as vulnerable to cutting edge attacks as other wallets are but employs various techniques that require a large combination of these cutting edge attacks to yield any signifcant damage to the network. But even in the case of one account being compromised, this does not have an affect on other accounts since each has its own set of additional devices.
 
 ### Full-threshold ECDSA
 
 The Gridlock Vault will utilize a full-threshold ECDSA. Elliptic Curve Digital Signature Algorithm(ECDSA) is a standardized signing algorithm that is used in Transport Layer Securty(TLS), code signing, cryptocurrency and more.  Full-threshold means that any t-out-of-n parties can sign a message thus this protocol would allow distributed signing and key-generation with any t <= n. Securely computing ECDSA in a distributed manner, t-out-of-n threshold signing, is needed for protecting of the private key. By splitting the secret key between multiple devices it avoids that the storage of the secret key becomes the single point of failure because no single device or party has access to the full private key. T-out-of-n Threshold Signatures ensures that any t+1 of the devices that store a share of the private key can jointly sign any given message but no t colluding parties can forge a signature at all. 
 
 For more details on full-threshold ECDSA for distributed key generation and signing the reader is referred to the paper by Lindell et al[1].
-
-### Intel’s SGX
-
-The Secret Network is solving the major issues of privacy and scalability currently impacting available public blockchains and decentralized application (dApp) platforms. The network leverages Intel's latest Trusted execution environments(TEE), Intel's Software Guard Extensions(SGX), technology to protect data while still allowing for computation over the data. Intel's SGX enables the execution of security-critical application code, called enclaves, in isolation from the untrustedsystem  software. The SGX reduces the attack surface significantly(App + Processor) and offers a scalable security solution in a mainstream enviroment. The SGX architecture is especially useful in cloud computing applications, since  data  and  computation  can  be  outsourced  to  an  external  computing  infrastructure  without having to fully trust the cloud provider and the entire software stack
-
-For more details on Intel's SGX the reader is refered to read [2] or visit [Intel's website](https://software.intel.com/content/www/us/en/develop/topics/software-guard-extensions.html).
 
 ## Advanced Features
 
@@ -232,20 +236,6 @@ Gridlock Watchlight is an optional add-on service that provides oversight protec
 Gridlock Network is the first truly secure and private cryptocurrency storage solution. Threshold Signatures combined with Trusted Execution Environments provide unparalleled security and availability, beyond any other solution available today. The offloading of complex key management eliminates one of the biggest barriers to mainstream crypto adoption. The elimination of a central authority vastly increases security and maintains a user’s privacy. 
 
 ## References 
-[1] [List of cryptocurrency exchange hacks](https://selfkey.org/list-of-cryptocurrency-exchange-hacks/)
 
-[2] [Mt Gox](https://www.wired.com/2014/03/bitcoin-exchange/)
-
-[3] [Usability issues cryptocurrency wallets](https://www.researchgate.net/profile/Md_Sadek_Ferdous/publication/340630209_Examining_Usability_Issues_in_Blockchain-Based_Cryptocurrency_Wallets/links/5e95e00f92851c2f529f6e2c/Examining-Usability-Issues-in-Blockchain-Based-Cryptocurrency-Wallets.pdf)
-
-[4] [Breaking Bitcoin Hardware Wallets](https://media.defcon.org/DEF%20CON%2025/DEF%20CON%2025%20presentations/DEF%20CON%2025%20-%20Datko-and-Quartier-Breaking-Bitcoin-Hardware-Wallets.pdf)
-
-[5] [Multisig hack](https://loess.ru/pdf/2017-07-20_14.33.01%20https_blog.zeppelin.solutions_on-the-parity-wallet-multisig-hack-405a8c1.pdf)
-
-[7] [Fast Secure Multiparty ECDSA with Practical Distributed KeyGeneration and Applications to Cryptocurrency Custody](https://dl.acm.org/doi/pdf/10.1145/3243734.3243788)
-
-[8] [Enigma: Decentralized Computation Platform with Guaranteed Privacy](https://arxiv.org/abs/1506.03471)
-
-[9] [Intel SGX Product brief 2019](https://software.intel.com/content/dam/develop/public/us/en/documents/intel-sgx-product-brief-2019.pdf)
-
-[10] [The Security of Intel SGX for Key Protection andData Privacy Applications](https://cdn2.hubspot.net/hubfs/1761386/Unbound_Docs_/security-of-intelsgx-key-protection-data-privacy-apps.pdf)
+[1] [Fast Secure Multiparty ECDSA with Practical Distributed KeyGeneration and Applications to Cryptocurrency Custody](https://dl.acm.org/doi/pdf/10.1145/3243734.3243788)
+[2] [The Security of Intel SGX for Key Protection andData Privacy Applications](https://cdn2.hubspot.net/hubfs/1761386/Unbound_Docs_/security-of-intelsgx-key-protection-data-privacy-apps.pdf)
