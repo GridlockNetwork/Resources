@@ -1,4 +1,4 @@
-﻿# Gridlock Network
+Gridlock Network
 
 ## A secure and private cryptocurrency storage service
 
@@ -26,7 +26,7 @@ and trusted key store services like Gridlock Watchlight.
 
 [User Experience](#user-experience) 
 
-- Wallet Generation
+- Vault Generation
 - Signing
 - Account Recovery
 
@@ -63,7 +63,7 @@ Enigma enclaves are potentially susceptible to side-channel attacks which can al
 
 Secondary network devices provide insurance against the possibility of cracked enclaves in Enigma's network. Additional devices include personal devices, trusted acquaintance devices, personal cloud devices, and trusted key store services like Gridlock Watchlight. The variety of each device increases network security by varying the attack surface, so a flaw in any area of the network does not cause a loss of assets. 
 
-Gridlock wallets are highly usable since users are not required to manage their private keys. Instead, keys are distributed throughout the network, controlled by the user alone. To access a wallet, owners provide a hashed identity and credentials. User identities are hashed and encrypted before storage which means no network device knows the identity of the wallet owner. 
+Gridlock vaults are highly usable since users are not required to manage their private keys. Instead, keys are distributed throughout the network, controlled by the user alone. To access a vault, owners provide a hashed identity and credentials. User identities are hashed and encrypted before storage which means no network device knows the identity of the vault owner. 
 
 ## Network Architecture
 
@@ -95,11 +95,11 @@ A trusted key store service, like Gridlock Watchlight, can store a key share and
 
 ## User Experience
 
-### Wallet Generation
+### Vault Generation
 
-New users generate a Gridlock wallet by creating an "account" with Gridlock and defining an identity and log-in credentials. The identity consists of non-private information, such as full name and government ID, and access credentials, which are a combination of password, 2FA, biometrics, etc. This information is required so decentralized devices can uniquely identify the user. All information is encrypted client-side, so the identity of the user remains secret. 
+New users generate a Gridlock vault by creating an "account" with Gridlock and defining an identity and log-in credentials. The identity consists of non-private information, such as full name and government ID, and access credentials, which are a combination of password, 2FA, biometrics, etc. This information is required so decentralized devices can uniquely identify the user. All information is encrypted client-side, so the identity of the user remains secret. 
 
-Once the user has created a wallet, they can generate addresses for each cryptocurrency they wish to store. 
+Once the user has created a vault, they can generate addresses for each cryptocurrency they wish to store. 
 
 ### Funds Transfer and Transaction Signing
 
@@ -113,11 +113,11 @@ Traditional account recovery mechanisms often require that users give up their p
 
 However, there are struggles with this goal, particularly when it comes to account recovery. Since there is no central authority to fall back on, we must consider how to best walk the line between security and usability. We feel we've solved this problem by introducing the concept of *fading security*. 
 
-Fading security is the process in which the credentials required to access a wallet are systematically reduced until access is re-established. If something goes wrong and a user cannot access their wallet, they only have to wait until the fading security mechanism catches up to a point where they can re-establish access. This can be inconvenient at times, but we feel this is an easy trade-off to gain perfect security and complete control.
+Fading security is the process in which the credentials required to access a vault are systematically reduced until access is re-established. If something goes wrong and a user cannot access their vault, they only have to wait until the fading security mechanism catches up to a point where they can re-establish access. This can be inconvenient at times, but we feel this is an easy trade-off to gain perfect security and complete control.
 
 ## Technical Process flow
 
-### Wallet Generation
+### Vault Generation
 
 The user provides multiple pieces of identification information (i1, i2... in), such as name and a government ID, and credential information (c1, c2... cn), such as password and either a 2FA or a biometric key. Using the provided information, Gridlock will construct a custom Merkle tree combining each element. This allows us to generate password tiers used by the fading security engine (see below). 
 
@@ -129,7 +129,7 @@ We will create n sets of hashed credentials for each participating device to cre
 
 Distributed key generation ensures that the private keys are never fully available, which eliminates problems with potentially compromised nodes. TSS requires multiple rounds of communication between participating devices to generate a private key; the amount of communication required depends on the number of participants. 
 
-Before user interaction, private-public keypairs are generated for all supported coins, reducing the wallet generation time for new users. Keys are stored in the system and available for user association once a user account is created. 
+Before user interaction, private-public keypairs are generated for all supported coins, reducing the vault generation time for new users. Keys are stored in the system and available for user association once a user account is created. 
 
 ### Transaction Signing
 
@@ -162,7 +162,7 @@ With this architecture, funds transfer and transaction signing occur as follows:
 
 ### Fading Security
 
-Fading security ensures guaranteed access to the user's wallet without centralized oversight. This is possible by reducing the requirements for access after a pre-determined time window has elapsed without the user making a connection. 
+Fading security ensures guaranteed access to the user's vault without centralized oversight. This is possible by reducing the requirements for access after a pre-determined time window has elapsed without the user making a connection. 
 
 The following example shows how the security engine might reduce access requirements based on an arbitrary number of security elements or "checks". The system is designed to give precedence to stronger access credentials.
 
@@ -197,15 +197,15 @@ Although we’ve gone to great lengths to ensure architectural security, a syste
 
 The Gridlock Vault will utilize a full-threshold ECDSA. Elliptic Curve Digital Signature Algorithm(ECDSA) is a standardized signing algorithm that is used in Transport Layer Securty(TLS), code signing, cryptocurrency and more.  Full-threshold means that any t-out-of-n parties can sign a message thus this protocol would allow distributed signing and key-generation with any t <= n. Securely computing ECDSA in a distributed manner, t-out-of-n threshold signing, is needed for protecting of the private key. By splitting the secret key between multiple devices it avoids that the storage of the secret key becomes the single point of failure because no single device or party has access to the full private key. T-out-of-n Threshold Signatures ensures that any t+1 of the devices that store a share of the private key can jointly sign any given message but no t colluding parties can forge a signature at all. 
 
-For more details on full-threshold ECDSA for distributed key generation and signing the reader is refered to the paper by Lindell et al[1].
+For more details on full-threshold ECDSA for distributed key generation and signing the reader is referred to the paper by Lindell et al[1].
 
 ## Advanced Features
 
 ### Multi-signature Accounts
 
-Multi-signature accounts are as simple as supporting two or more identities with the same wallet. Once added, future transactions require a defined subset of identities before a transaction is signed. The default is `n of n` identities but can be changed if approved by all parties. This option provides all the benefits of multi-sign authorizations without the weight of heavy multi-sig signatures on the blockchain. Since the approval logic is off-chain, the user can define granular logic beyond the standard yes-no logic in a multi-sig wallet. 
+Multi-signature accounts are as simple as supporting two or more identities with the same vault. Once added, future transactions require a defined subset of identities before a transaction is signed. The default is `n of n` identities but can be changed if approved by all parties. This option provides all the benefits of multi-sign authorizations without the weight of heavy multi-sig signatures on the blockchain. Since the approval logic is off-chain, the user can define granular logic beyond the standard yes-no logic in a multi-sig vault. 
 
-Wallets can also store metadata to document the identities that authorized each transaction. The information is stored within the wallet. This information allows users to keep an audit trail while maintaining on-chain privacy. 
+Vaults can also store metadata to document the identities that authorized each transaction. The information is stored within the vault. This information allows users to keep an audit trail while maintaining on-chain privacy. 
 
 ### One-way asset flow
 
@@ -219,7 +219,7 @@ Gridlock Network is effectively non-custodial since no entity has control of sto
 
 ### Watchlight Service
 
-Gridlock Watchlight is an optional add-on service that provides oversight protection for wallet owners. The service does not have the ultimate control of a user’s funds. Instead, it can closely monitor connected wallets and activity. This key share storage service adds the benefit of professional monitoring, which watches for suspicious transactions or coordinated attacks. This type of oversight is difficult with the standard distributed devices. If Watchlight identifies any suspicious activity, we can proactively notify the owner. This service bridges the gap between privacy and proactive monitoring. 
+Gridlock Watchlight is an optional add-on service that provides oversight protection for vault owners. The service does not have the ultimate control of a user’s funds. Instead, it can closely monitor connected vaults and activity. This key share storage service adds the benefit of professional monitoring, which watches for suspicious transactions or coordinated attacks. This type of oversight is difficult with the standard distributed devices. If Watchlight identifies any suspicious activity, we can proactively notify the owner. This service bridges the gap between privacy and proactive monitoring. 
 
 ## Conclusion
 
