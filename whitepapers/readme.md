@@ -217,7 +217,7 @@ The engine iterates through the defined logic whenever a user requests access. T
 
 ## Attack Vectors
 
-Although we've gone to great lengths to ensure architectural security, a system is only as safe as its known attack vectors. We identify 3 (4?) attack surfaces in the network.
+Although we've gone to great lengths to ensure architectural security, a system is only as safe as its known attack vectors. We have identified four attack surfaces in the network.
 
 ### Communication Hub Takeover
 
