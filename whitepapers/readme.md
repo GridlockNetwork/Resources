@@ -20,15 +20,30 @@ and trusted key store services like Gridlock Watchlight.
 
 [Network Architecture](#network-architecture)
 
-- Overview 
+- Primary devices 
 - Additional devices
-- Key Generation
+- Full-threshold ECDSA
+- Intel SGX
 
 [User Experience](#user-experience) 
 
 - Vault Generation
-- Signing
+- Funds Transfer and Transaction Signing
 - Account Recovery
+
+[Technical Process Flow](#technical-process-flow) 
+
+- Vault Generation
+- Key Generation
+- Transaction Signing
+- Fading Security
+
+[Attack Vectors](#attack-vectors)
+
+- Communication Hub Takeover
+- Coordinated Device Attacks
+- Stolen Credentials
+- Internal Attack
 
 [Advanced Features](#advanced-features)
 
@@ -38,6 +53,8 @@ and trusted key store services like Gridlock Watchlight.
 - Watchlight Service
 
 [Conclusion](#conclusion) 
+
+[References](#references) 
 
 ## Problem / Solution
 
@@ -99,7 +116,7 @@ The Gridlock Vault will utilize a full-threshold ECDSA. Elliptic Curve Digital S
 
 For more details on full-threshold ECDSA for distributed key generation and signing the reader is referred to the paper by Lindell et al. <sup>[7]</sup>.
 
-### Intel's SGX
+### Intel SGX
 
 The Secret Network is solving the major issues of privacy and scalability currently impacting available public blockchains and decentralized application (dApp) platforms. The network leverages Intel's latest Trusted execution environments(TEE), Intel's Software Guard Extensions(SGX), technology to protect data while still allowing for computation over the data. Intel's SGX enables the execution of security-critical application code, called enclaves, in isolation from the untrusted system  software. The SGX reduces the attack surface significantly(App + Processor) and offers a scalable security solution in a mainstream environment. The SGX architecture is especially useful in cloud computing applications, since  data  and  computation  can  be  outsourced  to  an  external  computing  infrastructure  without having to fully trust the cloud provider and the entire software stack.
 
@@ -202,19 +219,30 @@ The engine iterates through the defined logic whenever a user requests access. T
 
 Although we've gone to great lengths to ensure architectural security, a system is only as safe as its known attack vectors. We identify 3 (4?) attack surfaces in the network.
 
-1. Communication Hub Takeover - As a centralized system, the communication hub is vulnerable to take over in a traditional sense. Full control of the communication hub is deemed low risk because, in the case of a complete takeover, the attacker only gains glean minimal information from the routing requests. Compromising this piece would give the attacker the ability to decrypt where messages are being sent but would not enable modification of transferred information. Because information integrity is preserved, an eavesdropper can gain information on device locations. The alternative to a communication hub is a fully distributed system where each device has full knowledge of all other devices in the network. In many ways, this central communication hub provides added security because it can obfuscate the location of other participating devices. If the hub goes offline permanently, devices can re-establish access with their peers by broadcasting their location to a wider audience until a peer is found. 
+### Communication Hub Takeover
 
-2. Coordinated Device Attacks - By virtue of it's architecture, Gridlock accounts are protected even if 2/5 of the devices in a user's vault are compromised. Thus, a minimum viable attack would consist of taking over two enigma nodes and one additional node or, three additional nodes (the case of 1 enigma node + 2 additional nodes being trivial). This attack is, of course not specific to Gridlock architecture and is possible in any cryptocurrency wallet system, made easier by having a single key store for users. Gridlock is already guaranteed safer as it requires attackers to take over more than one system, but we address these concerns:
+As a centralized system, the communication hub is vulnerable to take over in a traditional sense. Full control of the communication hub is deemed low risk because, in the case of a complete takeover, the attacker only gains glean minimal information from the routing requests. Compromising this piece would give the attacker the ability to decrypt where messages are being sent but would not enable modification of transferred information. Because information integrity is preserved, an eavesdropper can gain information on device locations. The alternative to a communication hub is a fully distributed system where each device has full knowledge of all other devices in the network. In many ways, this central communication hub provides added security because it can obfuscate the location of other participating devices. If the hub goes offline permanently, devices can re-establish access with their peers by broadcasting their location to a wider audience until a peer is found. 
 
-   2.1 Enigma Node Attack - Enigma nodes utilize Intel Software Guard Extensions, which enable the execution of security-critical application code away from untrusted system software. This technology provides numerous safety guarantees that are much better than a standard compute server but is not an entirely secure system in its own right. In [2],  Lindell describes the extensive attack surface, including page, cache, energy management, and speculative execution side-channel attacks. Each of these attacks requires "rare and specialized expertise" to mitigate. This expertise is on the cutting edge, making Secret network attacks the bar overcome. "Due to the rich variety of effective attacks, the assumption should be that data privacy is not afforded via software run inside SGX." and is the exact reason why Gridlock enforces a minority share distribution on Enigma (e.g. 2 out of 5 nodes).
+### Coordinated Device Attacks
+
+By virtue of it's architecture, Gridlock accounts are protected even if 2/5 of the devices in a user's vault are compromised. Thus, a minimum viable attack would consist of taking over two enigma nodes and one additional node or, three additional nodes (the case of 1 enigma node + 2 additional nodes being trivial). This attack is, of course not specific to Gridlock architecture and is possible in any cryptocurrency wallet system, made easier by having a single key store for users. Gridlock is already guaranteed safer as it requires attackers to take over more than one system, but we address these concerns:
+
+#### Enigma Node Attack
+
+Enigma nodes utilize Intel Software Guard Extensions, which enable the execution of security-critical application code away from untrusted system software. This technology provides numerous safety guarantees that are much better than a standard compute server but is not an entirely secure system in its own right. In [2],  Lindell describes the extensive attack surface, including page, cache, energy management, and speculative execution side-channel attacks. Each of these attacks requires "rare and specialized expertise" to mitigate. This expertise is on the cutting edge, making Secret network attacks the bar overcome. "Due to the rich variety of effective attacks, the assumption should be that data privacy is not afforded via software run inside SGX." and is the exact reason why Gridlock enforces a minority share distribution on Enigma (e.g. 2 out of 5 nodes).
        
-   2.2 Non-Enigma Node Attack - Although the hardware security of additional nodes is comparatively lower to enigma nodes and thus more probable, Gridlock balances this by fragmenting the attack surface in multiple dimensions. The recommended Vault setup will involve a mix of differing hardware and software architectures. This improves strength by forcing attackers to exploit more than one architecture to compromise a vault, increasing difficulty exponentially for each added device. Architecture diversity does not protect against shared tenancy vulnerabilities which is why Gridlock users also benefit from fragmented device location. The protocol ensures each key share is not stored in the same environment, further isolating the threat of a compromised node.
+#### Non-Enigma Node Attack
+Although the hardware security of additional nodes is comparatively lower to enigma nodes and thus more probable, Gridlock balances this by fragmenting the attack surface in multiple dimensions. The recommended Vault setup will involve a mix of differing hardware and software architectures. This improves strength by forcing attackers to exploit more than one architecture to compromise a vault, increasing difficulty exponentially for each added device. Architecture diversity does not protect against shared tenancy vulnerabilities which is why Gridlock users also benefit from fragmented device location. The protocol ensures each key share is not stored in the same environment, further isolating the threat of a compromised node.
 
-The combination of 2.1 and 2.2 gives Gridlock's architecture better safety guarantees than any wallet architectures known today. 
+The combination of Enigma and non-Enigma devices gives Gridlock's architecture better safety guarantees than any wallet architectures known today. 
 
-3. Stealing a user's credentials - This attack surface is on the client side. Attacks here include impersonating users and cross-site request forgery attacks (xsrf attack). The former is mitigated using 2FA, which is an imperfect solution with known SIM-jacking techniques but easily blocked if any node in a users vault detects anomalous activity from the user. The situation of a cross-site forgery attack can be mitigated using an anti xsrf token in the proof of concept architecture and is rendered a non-issue in the official architecture.
+### Stolen Credentials
 
-4. Attack from Gridlock - A significantly privileged rogue employee at Gridlock could introduce backdoors into the code to gain unfettered access to key share storage devices. Professional third-party audits and open-source code make this a doubtful problem but for the sake of understanding, we'll assume it's possible. .....( Yeah how do we ensure this doesn't happen?)
+This attack surface is on the client side. Attacks here include impersonating users and cross-site request forgery attacks (xsrf attack). The former is mitigated using 2FA, which is an imperfect solution with known SIM-jacking techniques but easily blocked if any node in a users vault detects anomalous activity from the user. The situation of a cross-site forgery attack can be mitigated using an anti xsrf token in the proof of concept architecture and is rendered a non-issue in the official architecture.
+
+### Internal Attack
+
+An internal Gridlock developer might introduce backdoors into the code but would not be able to distribute that code to participants in the network. All released code will have many rounds of review, often including third-party security audits. Code that has been vetted will have a public hash shared with all network participants to ensure only trusted code is run. At this point a Gridlock developer has no more power than any other person. 
 
 ## Advanced Features
 
