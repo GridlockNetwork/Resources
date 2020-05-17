@@ -79,7 +79,7 @@ Enigma's privacy-preserving network is the primary share store option in Gridloc
 
 ##### Personal Device
 
-Gridlock uses a client-side application for wallet generation and usage. The application is also a storage participant and can encrypt and store a share of the private key. Users can add more devices of the same type with additional personal devices or hardware-based key storage devices. 
+Gridlock uses a client-side application for vault generation and usage. The application is also a storage participant and can encrypt and store a share of the private key. Users can add more devices of the same type with additional personal devices or hardware-based key storage devices. 
 
 ##### Personal Cloud Device
 
@@ -119,11 +119,11 @@ Fading security is the process in which the credentials required to access a vau
 
 ### Vault Generation
 
-The user provides multiple pieces of identification information (i1, i2... in), such as name and a government ID, and credential information (c1, c2... cn), such as password and either a 2FA or a biometric key. Using the provided information, Gridlock will construct a custom Merkle tree combining each element. This allows us to generate password tiers used by the fading security engine (see below). 
+The user provides multiple pieces of identification information (i<sub>1</sub>, i<sub>2</sub> ... i<sub>n</sub>), such as name and a government ID, and credential information (c<sub>1</sub>, c<sub>2</sub> ... c<sub>n</sub>), such as password and either a 2FA or a biometric key. Using the provided information, Gridlock will construct a custom Merkle tree combining each element. This allows us to generate password tiers used by the fading security engine (see below). 
 
 Prior to transmittal, each data element is hashed client-side using Argon2d with a moderately large number of iterations. The assumption is that crypto transactions are not extremely common, so a multi-second wait is a fair trade-off for increased protection against brute-force attacks. Additionally, the finality time of many blockchains makes the extended client-side delay negligible (i.e. a three-second wait for a Bitcoin transaction, which takes an average of 10 minutes to finalize). 
 
-We will create n sets of hashed credentials for each participating device to create unique hashed sets for each participant. Aragon2 automatically provides a unique salt per hash. This allows us to protect against user impersonation between devices. In other words, the H(c1) on one device will not match H(c1) on another device. Compromised devices cannot coerce additional key shares using their hashed credentials. 
+We will create n sets of hashed credentials for each participating device to create unique hashed sets for each participant. Aragon2 automatically provides a unique salt per hash. This allows us to protect against user impersonation between devices. In other words, the H(c<sub>1</sub>) on one device will not match H(c<sub>1</sub>) on another device. Compromised devices cannot coerce additional key shares using their hashed credentials. 
 
 ### Key Generation
 
@@ -154,7 +154,7 @@ The second state is much like the first, except it eliminates the communication 
 
 With this architecture, funds transfer and transaction signing occur as follows:
 
-1) The user transmits one packet of transactiom information for each participating storage device to *any* participating storage device. The first contacted device becomes the 'primary device' and is responsible for communication between other participants, as well as transaction signing. The primary device forwards transaction packets to their designated participants. 
+1) The user transmits one packet of transaction information for each participating storage device to *any* participating storage device. The first contacted device becomes the 'primary device' and is responsible for communication between other participants, as well as transaction signing. The primary device forwards transaction packets to their designated participants. 
 
 2) Each storage device validates the user's credentials. If accepted, it returns their portion of the signed transaction back to the primary device. 
 
@@ -186,24 +186,22 @@ The engine iterates through the defined logic whenever a user requests access. T
 
 ### Attack Vectors
 
-### Attack Vectors
-
 Although we’ve gone to great lengths to ensure architectural security, a system is only as safe as its known attack vectors. We identify 3 (4?) attack surfaces in the network.
 
-1. Communication Hub Takeover - As a centralized system, the communicatio hub is vulnerable to take over in a traditional sense. Full control of the communication hub is deemed a low risk because in the case of a full takeover, the attacker would be able to glean minimal information from the routing requests. Compromising this piece would give the attacker the ability to decrypt where messages are being sent but would not enable modification of transfered information. Because information integrity is preserved, an advanced eavesdropper can only use this information to reveal node location information. In fact this is an area of active research for Gridlock. While a centralized router can be taken over, it ensures a compromised node does not reveal the location of other nodes in the network. Solutions involving Distributed Hash Tables may offer the potential for increased security. (probably dont want to say an area of active research though, just putting to get feedback)
+1. Communication Hub Takeover - As a centralized system, the communication hub is vulnerable to take over in a traditional sense. Full control of the communication hub is deemed a low risk because in the case of a full takeover, the attacker would be able to glean minimal information from the routing requests. Compromising this piece would give the attacker the ability to decrypt where messages are being sent but would not enable modification of transferred information. Because information integrity is preserved, an advanced eavesdropper can only use this information to reveal node location information. In fact this is an area of active research for Gridlock. While a centralized router can be taken over, it ensures a compromised node does not reveal the location of other nodes in the network. Solutions involving Distributed Hash Tables may offer the potential for increased security. (probably don't want to say an area of active research though, just putting to get feedback)
 
-2. Coordinated Node Attacks - By virtue of it's architecture, Gridlock accounts are protected even if 2/5 of the nodes in a users vault are compromised. Thus, a minimum viable node attack would consist of taking over 2 enigma nodes + 1 additional node or 3 additional nodes (the case of 1 enigma node + 2 additional nodes being trivial). This attack is of course not speciffic to Gridlock architecture and is possible in any cryptocurrency wallet system, made easier by having a single keystore for users. Gridlock is already guranteed safer as it requires attackers to take over more than one system, but we address these concerns:
-    
-      2.1 Enigma Node Attack - Enigma nodes utilize Intel Software Guard Extensions, which enable
-the execution of security-critical application code away from untrusted system software. This technology provides numerous safety gurantees that are much better than a standard compute server but is not a perfectly secure system in its own right. In [2],  Lindell describes the extensive attack surface including page and cahce-based side channel , energy management , and speculative execution attacks. Each of these attacks requires "rare and specialized expertise" to mitigate and in fact are on the cutting edge and so that becomes the bar to hack a node in the engima network. "Due to the rich variety of effective attacks, the assumption should be that data privacy is not afforded via software run inside SGX." and is the exact reason why Gridlock uses enigma for 2 out of 5 nodes.
-    
-      2.2 Non Enigma Node Attack - Although the hardware security of additional nodes is comparitively lower to enigma nodes and thus more probable, Gridlock balances this by fragmenting the attack surface in multiple dimensions. The typical Vault network will not involve 2 nodes(non-enigma) with the same architecture. This benefits the user by forcing attackers to exploit more than one architecture to compromise their account, increasing difficulty exponentially for each added device. Architecture diversity does not protect against shared tenancy vulnerabilities which is why Gridlock users also benefit from fragmented device location. The protocol ensures each key share is not stored in the same environment, further isolating the threat of a compromised node.
+2. Coordinated Node Attacks - By virtue of it's architecture, Gridlock accounts are protected even if 2/5 of the nodes in a users vault are compromised. Thus, a minimum viable node attack would consist of taking over 2 enigma nodes + 1 additional node or 3 additional nodes (the case of 1 enigma node + 2 additional nodes being trivial). This attack is of course not specific to Gridlock architecture and is possible in any cryptocurrency wallet system, made easier by having a single key store for users. Gridlock is already guaranteed safer as it requires attackers to take over more than one system, but we address these concerns:
 
-The combination of 2.1 and 2.2 gives Gridlock's architecture better safety gurantees than those of the most secure wallet architectures known at this time. 
+   2.1 Enigma Node Attack - Enigma nodes utilize Intel Software Guard Extensions, which enable
+   the execution of security-critical application code away from untrusted system software. This technology provides numerous safety guarantees that are much better than a standard compute server but is not a perfectly secure system in its own right. In [2],  Lindell describes the extensive attack surface including page and cache-based side channel , energy management , and speculative execution attacks. Each of these attacks requires "rare and specialized expertise" to mitigate and in fact are on the cutting edge and so that becomes the bar to hack a node in the Secret network. "Due to the rich variety of effective attacks, the assumption should be that data privacy is not afforded via software run inside SGX." and is the exact reason why Gridlock uses enigma for 2 out of 5 nodes.
+       
+   2.2 Non Enigma Node Attack - Although the hardware security of additional nodes is comparatively lower to enigma nodes and thus more probable, Gridlock balances this by fragmenting the attack surface in multiple dimensions. The typical Vault network will not involve 2 nodes(non-enigma) with the same architecture. This benefits the user by forcing attackers to exploit more than one architecture to compromise their account, increasing difficulty exponentially for each added device. Architecture diversity does not protect against shared tenancy vulnerabilities which is why Gridlock users also benefit from fragmented device location. The protocol ensures each key share is not stored in the same environment, further isolating the threat of a compromised node.
 
-3. Stealing a users credentials - The last large attack surface is on the user client side. Attacks here include impersonating users and cross-site request forgey attacks(xsrf attack). The former is mitigated using 2FA, which is an imperfect solution with known SIM-jacking techniques but easily blocked if any node in a users vault detects anomalyous activity from the user. The situation of a cross-site forgery attack can be mitigated using an anti xsrf token in the proof of concept architecture and is rendered a non-issue in the official architecture.
+The combination of 2.1 and 2.2 gives Gridlock's architecture better safety guarantees than those of the most secure wallet architectures known at this time. 
 
-4. Attack from a developer - In theory, a soon-to-be rogue developer could introduce back doors into all the code repo's and have unfettered access to user's valuts... Yeah how do we ensure this doesnt happen?
+3. Stealing a users credentials - The last large attack surface is on the user client side. Attacks here include impersonating users and cross-site request forgery attacks (xsrf attack). The former is mitigated using 2FA, which is an imperfect solution with known SIM-jacking techniques but easily blocked if any node in a users vault detects anomalous activity from the user. The situation of a cross-site forgery attack can be mitigated using an anti xsrf token in the proof of concept architecture and is rendered a non-issue in the official architecture.
+
+4. Attack from a developer - In theory, a soon-to-be rogue developer could introduce back doors into all the code repo's and have unfettered access to user's vaults... Yeah how do we ensure this doesn't happen?
 
 ### Full-threshold ECDSA
 
@@ -213,7 +211,7 @@ For more details on full-threshold ECDSA for distributed key generation and sign
 
 ### Intel's SGX
 
-The Secret Network is solving the major issues of privacy and scalability currently impacting available public blockchains and decentralized application (dApp) platforms. The network leverages Intel's latest Trusted execution environments(TEE), Intel's Software Guard Extensions(SGX), technology to protect data while still allowing for computation over the data. Intel's SGX enables the execution of security-critical application code, called enclaves, in isolation from the untrustedsystem  software. The SGX reduces the attack surface significantly(App + Processor) and offers a scalable security solution in a mainstream enviroment. The SGX architecture is especially useful in cloud computing applications, since  data  and  computation  can  be  outsourced  to  an  external  computing  infrastructure  without having to fully trust the cloud provider and the entire software stack
+The Secret Network is solving the major issues of privacy and scalability currently impacting available public blockchains and decentralized application (dApp) platforms. The network leverages Intel's latest Trusted execution environments(TEE), Intel's Software Guard Extensions(SGX), technology to protect data while still allowing for computation over the data. Intel's SGX enables the execution of security-critical application code, called enclaves, in isolation from the untrusted system  software. The SGX reduces the attack surface significantly(App + Processor) and offers a scalable security solution in a mainstream environment. The SGX architecture is especially useful in cloud computing applications, since  data  and  computation  can  be  outsourced  to  an  external  computing  infrastructure  without having to fully trust the cloud provider and the entire software stack
 
 ## Advanced Features
 
@@ -225,7 +223,7 @@ Vaults can also store metadata to document the identities that authorized each t
 
 ### One-way asset flow
 
-Periodic rotating of private keys is important to increase system security. This rotation reduces the time-window in which an attacker can obtain a private key. An attacker must compromise each device, storing a key share before the private key is changed. TSS-based wallets can rotate key shares to generate a different set of key shares while retaining the original public key. This mechanism is useful when users want to retain the public key for long-term use, but the typical user does not require this benefit.
+Periodic rotating of private keys is important to increase system security. This rotation reduces the time-window in which an attacker can obtain a private key. An attacker must compromise each device, storing a key share before the private key is changed. TSS-based vaults can rotate key shares to generate a different set of key shares while retaining the original public key. This mechanism is useful when users want to retain the public key for long-term use, but the typical user does not require this benefit.
 
 It is, therefore, possible to have a public key for receiving funds only and a separate public key for sending funds. Put another way, all funds entering the system are not restricted to the public key used to import funds. Gridlock can freely rotate funds throughout the network as long as the user can track and transfer funds when desired. This rotation has enormous privacy benefits as the system becomes a mixer by default. 
 
