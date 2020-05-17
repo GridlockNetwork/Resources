@@ -45,21 +45,21 @@ and trusted key store services like Gridlock Watchlight.
 
 Cryptocurrency users have only two options when storing assets, either with a third-party cryptocurrency exchange or a personal cryptocurrency wallet. Both options have drawbacks in privacy, usability, and security, some of which can ultimately lead to a loss of all assets.
 
-Exchanges are centralized entities with complete control over a user's funds and knowledge of the user's identities. Users are subject to arbitrary transaction delays and withheld assets based on the whim of the exchange. Furthermore, all assets are lost if an exchange is hacked, goes out of business, exit scams, or is otherwise shut down. Many exchanges have shut down in one of these ways, which has led to the saying "Not your keys, not your coins". The saying promotes storing of assets in personal wallets outside the oversight of exchanges.
+Exchanges are centralized entities with complete control over a user's funds and knowledge of the user's identities. Users are subject to arbitrary transaction delays and withheld assets based on the whim of the exchange. Furthermore, all assets are lost if an exchange is hacked[1], goes out of business, exit scams, or is otherwise shut down[2]. Many exchanges have shut down in one of these ways, which has led to the saying "Not your keys, not your coins". The saying promotes storing of assets in personal wallets outside the oversight of exchanges.
 
-While crypto wallets give control back to the user, that control is a double-edged sword. Full control means a user is solely responsible for the management and security of their private keys. All assets vanish if a private key is lost or stolen. Most wallets do have backup mechanisms, namely mnemonic phrases, which allow users to recover lost keys. The problem here is the backup itself is still a single point of failure. If a user's mnemonic phrase is lost or stolen, all assets are unrecoverable. 
+While crypto wallets give control back to the user, that control is a double-edged sword. Full control means a user is solely responsible for the management and security of their private keys. All assets vanish if a private key is lost or stolen. Most wallets do have backup mechanisms, namely mnemonic phrases, which allow users to recover lost keys. The problem here is the backup itself is still a single point of failure. If a user's mnemonic phrase is lost or stolen, all assets are unrecoverable. Put differently, crypto wallets are lacking in usability[3].
 
-Other solutions like hardware wallets, smart contract wallets, or multi-sig wallets add value in one way or another, but all still have problems with security and usability. The community needs a solution that doesn't sacrifice privacy in the name of usability or usability in the name of security. 
+Other solutions like hardware wallets, smart contract wallets, or multi-sig wallets add value in one way or another, but all still have problems with security and usability[4][5]. The community needs a solution that doesn't sacrifice privacy in the name of usability or usability in the name of security.
 
 ### Solution
 
 Gridlock overcomes problems with security, usability, and privacy by distributing a user's private keys across multiple devices. 
 
-Keys are split into key shares using the full-threshold ECDSA signature scheme, which requires a designated threshold of shares before the key is used. The initially recommended threshold is 3 of 5, meaning that 5 key shares are distributed, and 3 must come together to rebuild the key. Shares are distributed among participating network devices for storage. 
+Keys are split into key shares using the full-threshold ECDSA signature scheme[7], which requires a designated threshold of shares before the key is used. The initially recommended threshold is 3 of 5, meaning that 5 key shares are distributed, and 3 must come together to rebuild the key. Shares are distributed among participating network devices for storage. 
 
-The primary tool for key storage is Enigma's Secret Network, making Gridlock a network of networks. Enigma's network ensures the secrecy of shares by mandating that nodes running the network use Intel’s trusted execution environments (TEE), also known as enclaves, for all computations and data storage. This feature encrypts all sensitive data, hiding it from everyone, including the node operator. This restriction allows for the availability benefits of multiple storage nodes and protects against the possibility of malicious node operators.
+The primary tool for key storage is Enigma's Secret Network[8], making Gridlock a network of networks. Enigma's network ensures the secrecy of shares by mandating that nodes running the network use Intel’s trusted execution environments (TEE), also known as enclaves, for all computations and data storage[9]. This feature encrypts all sensitive data, hiding it from everyone, including the node operator. This restriction allows for the availability benefits of multiple storage nodes and protects against the possibility of malicious node operators.
 
-Enigma enclaves are potentially susceptible to side-channel attacks which can allow hackers or node operators to break the security of an enclave. The viability of these attacks is questionable outside an academic setting, given an appropriately coded protocol. Still, the potential of loss is too great to rely solely on an enclave to ensure the security of a private key. For additional security, secondary non-Enigma devices are necessary. 
+Enigma enclaves are potentially susceptible to side-channel attacks which can allow hackers or node operators to break the security of an enclave[10]. The viability of these attacks is questionable outside an academic setting, given an appropriately coded protocol. Still, the potential of loss is too great to rely solely on an enclave to ensure the security of a private key. For additional security, secondary non-Enigma devices are necessary. 
 
 Secondary network devices provide insurance against the possibility of cracked enclaves in Enigma's network. Additional devices include personal devices, trusted acquaintance devices, personal cloud devices, and trusted key store services like Gridlock Watchlight. The variety of each device increases network security by varying the attack surface, so a flaw in any area of the network does not cause a loss of assets. 
 
@@ -209,6 +209,10 @@ The Gridlock Vault will utilize a full-threshold ECDSA. Elliptic Curve Digital S
 
 For more details on full-threshold ECDSA for distributed key generation and signing the reader is referred to the paper by Lindell et al. <sup>[1]</sup>.
 
+### Intel's SGX
+
+The Secret Network is solving the major issues of privacy and scalability currently impacting available public blockchains and decentralized application (dApp) platforms. The network leverages Intel's latest Trusted execution environments(TEE), Intel's Software Guard Extensions(SGX), technology to protect data while still allowing for computation over the data. Intel's SGX enables the execution of security-critical application code, called enclaves, in isolation from the untrustedsystem  software. The SGX reduces the attack surface significantly(App + Processor) and offers a scalable security solution in a mainstream enviroment. The SGX architecture is especially useful in cloud computing applications, since  data  and  computation  can  be  outsourced  to  an  external  computing  infrastructure  without having to fully trust the cloud provider and the entire software stack
+
 ## Advanced Features
 
 ### Multi-signature Accounts
@@ -237,5 +241,20 @@ Gridlock Network is the first truly secure and private cryptocurrency storage so
 
 ## References 
 
-[1] [Fast Secure Multiparty ECDSA with Practical Distributed KeyGeneration and Applications to Cryptocurrency Custody](https://dl.acm.org/doi/pdf/10.1145/3243734.3243788)
-[2] [The Security of Intel SGX for Key Protection andData Privacy Applications](https://cdn2.hubspot.net/hubfs/1761386/Unbound_Docs_/security-of-intelsgx-key-protection-data-privacy-apps.pdf)
+[1] [List of cryptocurrency exchange hacks](https://selfkey.org/list-of-cryptocurrency-exchange-hacks/)
+
+[2] [Mt Gox](https://www.wired.com/2014/03/bitcoin-exchange/)
+
+[3] [Usability issues cryptocurrency wallets](https://www.researchgate.net/profile/Md_Sadek_Ferdous/publication/340630209_Examining_Usability_Issues_in_Blockchain-Based_Cryptocurrency_Wallets/links/5e95e00f92851c2f529f6e2c/Examining-Usability-Issues-in-Blockchain-Based-Cryptocurrency-Wallets.pdf)
+
+[4] [Breaking Bitcoin Hardware Wallets](https://media.defcon.org/DEF%20CON%2025/DEF%20CON%2025%20presentations/DEF%20CON%2025%20-%20Datko-and-Quartier-Breaking-Bitcoin-Hardware-Wallets.pdf)
+
+[5] [Multisig hack](https://loess.ru/pdf/2017-07-20_14.33.01%20https_blog.zeppelin.solutions_on-the-parity-wallet-multisig-hack-405a8c1.pdf)
+
+[7] [Fast Secure Multiparty ECDSA with Practical Distributed KeyGeneration and Applications to Cryptocurrency Custody](https://dl.acm.org/doi/pdf/10.1145/3243734.3243788)
+
+[8] [Enigma: Decentralized Computation Platform with Guaranteed Privacy](https://arxiv.org/abs/1506.03471)
+
+[9] [Intel SGX Product brief 2019](https://software.intel.com/content/dam/develop/public/us/en/documents/intel-sgx-product-brief-2019.pdf)
+
+[10] [The Security of Intel SGX for Key Protection andData Privacy Applications](https://cdn2.hubspot.net/hubfs/1761386/Unbound_Docs_/security-of-intelsgx-key-protection-data-privacy-apps.pdf)
