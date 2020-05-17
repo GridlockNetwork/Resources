@@ -166,21 +166,25 @@ Fading security ensures guaranteed access to the user's vault without centralize
 
 The following example shows how the security engine might reduce access requirements based on an arbitrary number of security elements or "checks". The system is designed to give precedence to stronger access credentials.
 
+------
+
 <code>G</code> = **G**uardians		 	 <code>D</code> = **D**evice (2FA)	            <code>P</code> = **P**assword
 
 <code>B</code> = **B**iometric key		<code>A</code> = Sum of **A**ny checks	<code>C</code> = Total number of **C**hecks
 
 <code>T</code> = number of **T**ime windows elapsed without access
 
+------
+
 The engine iterates through the defined logic whenever a user requests access. The system starts at a time window <code>T</code> of 0 and increments by 1 for each time new window without a successful connection. Once a connection is established, <code>t</code> is reset to 0. 
 
-**Tier 1 :** If <code>C</code> - <code>T</code> - 2 = 0 -> evaluate credentials and grant access if <code>C</code> - <code>T</code> - 2 = <code>B</code> + <code>P</code> + <code>A</code>
+**Tier 1 :** If <code>C-T-2=0</code> -> evaluate credentials and grant access if <code>C-T-2=B+P+A</code>
 
-**Tier 2:** If <code>C</code> - <code>T</code> - 1 = 0 -> evaluate credentials and grant access if <code>C</code> - <code>T</code> - 1 = (<code>B</code> or <code>P</code>) + <code>A</code>
+**Tier 2:** If <code>C-T-1=0</code> -> evaluate credentials and grant access if <code>C-T-1=(B|P)+A</code>
 
-**Tier 3:** If <code>C</code> - <code>T</code> = 0 -> evaluate credentials and grant access if <code>C</code> - <code>T</code> = <code>A</code> AND <code>A</code> > 0
+**Tier 3:** If <code>C-T=0</code> -> evaluate credentials and grant access if <code>C-T=A & A>0</code>
 
-**Tier 3a:** If  <code>C</code> - <code>T</code> = 0 AND <code>A</code> > 0  -> grant access if based on user identity only as long as the requestor put up ~$1 worth of cryptocurrency as collateral. This helps stop network "scanning" looking for open accounts.
+**Tier 4:** If <code>C-T=0 & A>0</code>  -> grant access if based on user identity only as long as the requestor submits the identity with ~$1 worth of cryptocurrency as collateral. This helps stop network "scanning" looking for open accounts.
 
 **Tier 5:** Transfer funds to pre-defined Guardian
 
