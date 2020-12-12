@@ -13,9 +13,9 @@ Secondary: Montserrat
 |---|---|---|
 Logo| <img src="./logos/png/BG Logo.png" width="100"/>| <img src="./logos/png/BG Inverted Logo.png" width="100"/>
 
-Horizontal| <img src="./logos/png/BG Logo Htext.png" width="200"/> | <img src="./logos/png/BG Inverted Logo Htext.png" width="200"/>
+Horizontal| <img src="./logos/png/BG Logo HText.png" width="200"/> | <img src="./logos/png/BG Inverted Logo HText.png" width="200"/>
 
-Vertical | <img src="./logos/png/BG Logo Vtext.png" width="80"/> | <img src="./logos/png/BG Inverted Logo Vtext.png" width="80"/>
+Vertical | <img src="./logos/png/BG Logo VText.png" width="80"/> | <img src="./logos/png/BG Inverted Logo VText.png" width="80"/>
 
 ### Colors
 
